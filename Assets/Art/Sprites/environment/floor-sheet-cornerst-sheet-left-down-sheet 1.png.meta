@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 2b8f53a1d29e4442582ee8413ad4ef3e
+guid: 20f80c63d13294aae8ae185341211642
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5506016670687548264
-    second: aciana-detailed-talking_0
-  - first:
-      213: -1549205898162900976
-    second: aciana-detailed-talking_1
-  - first:
-      213: -3962232967655891765
-    second: aciana-detailed-talking_2
-  - first:
-      213: -3072544096083236269
-    second: aciana-detailed-talking_3
-  - first:
-      213: -5068296174879537477
-    second: aciana-detailed-talking_4
+      213: -7571628053331612538
+    second: floor-sheet-cornerst-sheet-left-down-sheet 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,111 +113,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: aciana-detailed-talking_0
+      name: floor-sheet-cornerst-sheet-left-down-sheet 1_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 56
-        height: 62
+        x: 0
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 89c2a489203b693b0800000000000000
-      internalID: -5506016670687548264
+      spriteID: 68c69c5d66c2ce690800000000000000
+      internalID: -7571628053331612538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: aciana-detailed-talking_1
+      name: floor-sheet-cornerst-sheet-left-down-sheet 1_1
       rect:
         serializedVersion: 2
-        x: 67
-        y: 0
-        width: 56
-        height: 62
+        x: 16
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0107f04917d108ae0800000000000000
-      internalID: -1549205898162900976
+      spriteID: 04066c68d0bcc4dbf8a47eadfabf5410
+      internalID: 1086000641
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: aciana-detailed-talking_2
+      name: floor-sheet-cornerst-sheet-left-down-sheet 1_2
       rect:
         serializedVersion: 2
-        x: 131
+        x: 0
         y: 0
-        width: 56
-        height: 62
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bcc5785db125309c0800000000000000
-      internalID: -3962232967655891765
+      spriteID: cb149eb61bdad4e899564c8ff4dd0dde
+      internalID: -1743087793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: aciana-detailed-talking_3
+      name: floor-sheet-cornerst-sheet-left-down-sheet 1_3
       rect:
         serializedVersion: 2
-        x: 196
+        x: 16
         y: 0
-        width: 55
-        height: 61
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 35a2c347c612c55d0800000000000000
-      internalID: -3072544096083236269
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: aciana-detailed-talking_4
-      rect:
-        serializedVersion: 2
-        x: 259
-        y: 0
-        width: 56
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bb685df5b7bc9a9b0800000000000000
-      internalID: -5068296174879537477
+      spriteID: ff70ac501f9504698a8b13e30a0904a7
+      internalID: -2038050518
       vertices: []
       indices: 
       edges: []
@@ -238,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5170b158edcbe4292a196cd114d0bbd9
     internalID: 0
     vertices: []
     indices: 
@@ -246,13 +212,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      aciana-detailed-talking_0: -5506016670687548264
-      aciana-detailed-talking_1: -1549205898162900976
-      aciana-detailed-talking_2: -3962232967655891765
-      aciana-detailed-talking_3: -3072544096083236269
-      aciana-detailed-talking_4: -5068296174879537477
+      floor-sheet-cornerst-sheet-left-down-sheet 1_0: -7571628053331612538
+      floor-sheet-cornerst-sheet-left-down-sheet 1_1: 1086000641
+      floor-sheet-cornerst-sheet-left-down-sheet 1_2: -1743087793
+      floor-sheet-cornerst-sheet-left-down-sheet 1_3: -2038050518
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

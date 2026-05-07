@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 2b8f53a1d29e4442582ee8413ad4ef3e
+guid: 73f4a241dbffd49b89a8d16b020e93a3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5506016670687548264
-    second: aciana-detailed-talking_0
-  - first:
-      213: -1549205898162900976
-    second: aciana-detailed-talking_1
-  - first:
-      213: -3962232967655891765
-    second: aciana-detailed-talking_2
-  - first:
-      213: -3072544096083236269
-    second: aciana-detailed-talking_3
-  - first:
-      213: -5068296174879537477
-    second: aciana-detailed-talking_4
+      213: -4373184736405950995
+    second: floor_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,111 +113,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: aciana-detailed-talking_0
+      name: floor_3
       rect:
         serializedVersion: 2
-        x: 3
+        x: 16
         y: 0
-        width: 56
-        height: 62
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 89c2a489203b693b0800000000000000
-      internalID: -5506016670687548264
+      spriteID: dedec5107a35f43c0800000000000000
+      internalID: -4373184736405950995
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: aciana-detailed-talking_1
+      name: floor_0
       rect:
         serializedVersion: 2
-        x: 67
-        y: 0
-        width: 56
-        height: 62
+        x: 0
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0107f04917d108ae0800000000000000
-      internalID: -1549205898162900976
+      spriteID: 8d6ee270cd30449cdbae9c0911172d9e
+      internalID: -763587644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: aciana-detailed-talking_2
+      name: floor_1
       rect:
         serializedVersion: 2
-        x: 131
-        y: 0
-        width: 56
-        height: 62
+        x: 16
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bcc5785db125309c0800000000000000
-      internalID: -3962232967655891765
+      spriteID: 8b735271bd4334e61bb16f9b0a74284f
+      internalID: 2112561982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: aciana-detailed-talking_3
+      name: floor_2
       rect:
         serializedVersion: 2
-        x: 196
+        x: 0
         y: 0
-        width: 55
-        height: 61
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 35a2c347c612c55d0800000000000000
-      internalID: -3072544096083236269
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: aciana-detailed-talking_4
-      rect:
-        serializedVersion: 2
-        x: 259
-        y: 0
-        width: 56
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bb685df5b7bc9a9b0800000000000000
-      internalID: -5068296174879537477
+      spriteID: 3fbb60ecb4fa34665ad12abb346c2d80
+      internalID: -739568778
       vertices: []
       indices: 
       edges: []
@@ -238,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 385552dc15d6d44adbdda7149d2bd316
     internalID: 0
     vertices: []
     indices: 
@@ -246,13 +212,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      aciana-detailed-talking_0: -5506016670687548264
-      aciana-detailed-talking_1: -1549205898162900976
-      aciana-detailed-talking_2: -3962232967655891765
-      aciana-detailed-talking_3: -3072544096083236269
-      aciana-detailed-talking_4: -5068296174879537477
+      floor_0: -763587644
+      floor_1: 2112561982
+      floor_2: -739568778
+      floor_3: -4373184736405950995
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
