@@ -6,12 +6,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D characterBody;
     private Vector2 velocity;
     private Vector2 inputMovement;
+    private Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         velocity = new Vector2(speed, speed);
         characterBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
             Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")
         );
+
+        animator.SetFloat("X", inputMovement.x);
+        animator.SetFloat("Y", inputMovement.y);
     }
 
     private void FixedUpdate()
