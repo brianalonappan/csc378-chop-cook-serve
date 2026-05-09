@@ -918,7 +918,8 @@ GameObject:
   - component: {fileID: 858962461}
   - component: {fileID: 858962462}
   - component: {fileID: 858962464}
-  - component: {fileID: 858962463}
+  - component: {fileID: 858962465}
+  - component: {fileID: 858962466}
   m_Layer: 0
   m_Name: Walkdown0
   m_TagString: Untagged
@@ -935,7 +936,7 @@ Transform:
   m_GameObject: {fileID: 858962460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.56, y: 9.32, z: 0}
+  m_LocalPosition: {x: 3.88, y: 6.54, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1000,18 +1001,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &858962463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858962460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b857fd3325dc1dd49a52a0a613d0682f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!50 &858962464
 Rigidbody2D:
   serializedVersion: 5
@@ -1027,7 +1016,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1038,7 +1027,33 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &858962465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858962460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c626372151f4d1941adad5d9929bf34c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  speed: 2
+--- !u!114 &858962466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858962460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c626372151f4d1941adad5d9929bf34c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  speed: 2
 --- !u!1 &1100569489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,7 +1830,7 @@ Transform:
   m_GameObject: {fileID: 2005882604}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 20, z: 0}
+  m_LocalPosition: {x: -10, y: 20, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
