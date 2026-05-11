@@ -7,13 +7,15 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 velocity;
     private Vector2 inputMovement;
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         velocity = new Vector2(speed, speed);
         characterBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,15 @@ public class PlayerMovement : MonoBehaviour
             Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")
         );
+
+        if (inputMovement.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (inputMovement.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
 
         animator.SetFloat("X", inputMovement.x);
         animator.SetFloat("Y", inputMovement.y);
