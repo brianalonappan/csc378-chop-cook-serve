@@ -11,7 +11,6 @@ public class PlayerInventory : MonoBehaviour
         ChoppedPotato,
         CookedFries,
         BurntFries,
-        CharredFries,
 
         // Pizza path
         Dough,
@@ -21,7 +20,6 @@ public class PlayerInventory : MonoBehaviour
         PepperoniPizza,
         CookedPizza,
         BurntPizza,
-        CharredPizza
     }
 
     [Header("Current Item")]
