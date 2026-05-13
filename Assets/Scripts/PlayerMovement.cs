@@ -1,24 +1,27 @@
 using UnityEngine;
-// Code Gathered by: https://youtu.be/PAA_lCutsfE?si=lfrVQ088btVhCK3I
+
 public class PlayerMovement : MonoBehaviour
 {
-    public int speed = 2;
+    public float speed = 2f;
+    public float interactDistance = 1f;
+    public LayerMask interactLayer;
+
     private Rigidbody2D characterBody;
-    private Vector2 velocity;
-    private Vector2 inputMovement;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Vector2 inputMovement;
+    private Vector2 lastMoveDirection = Vector2.down;
+
     void Start()
     {
-        velocity = new Vector2(speed, speed);
         characterBody = GetComponent<Rigidbody2D>();
-        animator = GetComponentInChildren<Animator>();
+
+        animator = GetComponent<Animator>();
+
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         inputMovement = new Vector2(
@@ -26,23 +29,72 @@ public class PlayerMovement : MonoBehaviour
             Input.GetAxisRaw("Vertical")
         );
 
-        if (inputMovement.x > 0)
+        if (inputMovement != Vector2.zero)
         {
-            spriteRenderer.flipX = false;
-        }
-        else if (inputMovement.x < 0)
-        {
-            spriteRenderer.flipX = true;
+            lastMoveDirection = inputMovement.normalized;
         }
 
         animator.SetFloat("X", inputMovement.x);
         animator.SetFloat("Y", inputMovement.y);
+
+        if (inputMovement.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (inputMovement.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("E was pressed");
+            TryInteract();
+        }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        Vector2 delta = inputMovement * velocity * Time.deltaTime;
+        Vector2 delta = inputMovement * speed * Time.fixedDeltaTime;
+
         Vector2 newPosition = characterBody.position + delta;
+
         characterBody.MovePosition(newPosition);
+    }
+
+    void TryInteract()
+    {
+        Debug.Log("E was pressed. Checking for interactable station...");
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            characterBody.position,
+            lastMoveDirection,
+            interactDistance,
+            interactLayer
+        );
+
+        Debug.DrawRay(
+            characterBody.position,
+            lastMoveDirection * interactDistance,
+            Color.red,
+            1f
+        );
+
+        if (hit.collider == null)
+        {
+            Debug.Log("No station was hit.");
+            return;
+        }
+
+        Debug.Log("Station Interacted With: " + hit.collider.name);
+
+        InteractableScript station = hit.collider.GetComponent<InteractableScript>();
+
+        if (station == null)
+        {
+            Debug.Log("Hit object does not have StationInteractable attached.");
+            return;
+        }
+        station.Interact();
     }
 }
