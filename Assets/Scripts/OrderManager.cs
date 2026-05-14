@@ -7,13 +7,13 @@ public class OrderManager : MonoBehaviour
     public static OrderManager Instance;
 
     public ReceiptOrder[] receiptPrefabs;
-    public Transform[] receiptSlots;
+    public Transform receiptSpawnParent; // drag ReceiptLine here
 
     public float spawnInterval = 20f;
     public int maxReceiptsOnScreen = 3;
 
-    private List<ReceiptOrder> receiptQueue =
-        new List<ReceiptOrder>();
+    private List<ReceiptOrder> receiptQueue = new List<ReceiptOrder>();
+    private ReceiptOrder activeReceipt;
 
     private void Awake()
     {
@@ -40,31 +40,38 @@ public class OrderManager : MonoBehaviour
 
     private void SpawnRandomReceipt()
     {
-        int randomIndex =
-            Random.Range(0, receiptPrefabs.Length);
+        int randomIndex = Random.Range(0, receiptPrefabs.Length);
 
-        ReceiptOrder newReceipt =
-            Instantiate(
-                receiptPrefabs[randomIndex],
-                receiptSlots[receiptQueue.Count].position,
-                Quaternion.identity
-            );
+        ReceiptOrder newReceipt = Instantiate(
+            receiptPrefabs[randomIndex],
+            receiptSpawnParent
+        );
+
+        RectTransform rect = newReceipt.GetComponent<RectTransform>();
+        rect.anchoredPosition = Vector2.zero;
+        rect.localScale = Vector3.one * 0.6f;
 
         receiptQueue.Add(newReceipt);
 
-        UpdateReceiptPositions();
+        if (activeReceipt == null)
+        {
+            activeReceipt = newReceipt;
+        }
+    }
+
+    public void SetActiveReceipt(ReceiptOrder receipt)
+    {
+        activeReceipt = receipt;
+        Debug.Log(receipt.orderType + " is now active.");
     }
 
     public void TryUseStation(StationType stationType)
     {
-        if (receiptQueue.Count == 0)
+        if (activeReceipt == null)
         {
-            Debug.Log("No receipts in queue.");
+            Debug.Log("No active receipt.");
             return;
         }
-
-        ReceiptOrder activeReceipt =
-            receiptQueue[0];
 
         bool completedSomething =
             activeReceipt.TryCompleteStationTask(stationType);
@@ -86,17 +93,11 @@ public class OrderManager : MonoBehaviour
             receiptQueue.Remove(completedReceipt);
         }
 
-        Destroy(completedReceipt.gameObject);
-
-        UpdateReceiptPositions();
-    }
-
-    private void UpdateReceiptPositions()
-    {
-        for (int i = 0; i < receiptQueue.Count; i++)
+        if (activeReceipt == completedReceipt)
         {
-            receiptQueue[i].transform.position =
-                receiptSlots[i].position;
+            activeReceipt = receiptQueue.Count > 0 ? receiptQueue[0] : null;
         }
+
+        Destroy(completedReceipt.gameObject);
     }
 }
