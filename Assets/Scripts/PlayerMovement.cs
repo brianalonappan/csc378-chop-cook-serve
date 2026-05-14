@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 2f;
-    public float interactDistance = 1f;
+    public float interactDistance = 0.5f;
     public LayerMask interactLayer;
 
     private Rigidbody2D characterBody;
