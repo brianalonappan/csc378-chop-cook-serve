@@ -13,6 +13,8 @@ public class ReceiptOrder : MonoBehaviour
     public OrderType orderType;
     public TextMeshPro receiptText;
 
+    private HeldFoodVisuals heldFoodVisuals;
+
     public bool orderReceived;
     public bool washedHands;
 
@@ -25,6 +27,11 @@ public class ReceiptOrder : MonoBehaviour
 
     public bool foodBurned;
     public bool finishedOrder;
+
+    private void Start()
+    {
+        heldFoodVisuals = FindFirstObjectByType<HeldFoodVisuals>();
+    }
 
     public bool TryCompleteStationTask(StationType stationType)
     {
@@ -121,6 +128,10 @@ public class ReceiptOrder : MonoBehaviour
             served = true;
             finishedOrder = true;
             CrossOff("Serve Fries");
+
+            if (heldFoodVisuals != null)
+                heldFoodVisuals.HideAllFood();
+
             Invoke("RemoveReceipt", 1f);
             Debug.Log("Fries complete");
             return true;
@@ -163,9 +174,19 @@ public class ReceiptOrder : MonoBehaviour
             addedToppings = true;
 
             if (isPepperoni)
+            {
                 CrossOff("Sauce Dough & Top with Cheese + Pepperoni");
+
+                if (heldFoodVisuals != null)
+                    heldFoodVisuals.ShowPepperoniPizza();
+            }
             else
+            {
                 CrossOff("Sauce Dough & Top with Cheese");
+
+                if (heldFoodVisuals != null)
+                    heldFoodVisuals.ShowCheesePizza();
+            }
 
             return true;
         }
@@ -195,6 +216,10 @@ public class ReceiptOrder : MonoBehaviour
             served = true;
             finishedOrder = true;
             CrossOff("Serve Pizza");
+
+            if (heldFoodVisuals != null)
+                heldFoodVisuals.HideAllFood();
+
             Invoke("RemoveReceipt", 1f);
             Debug.Log(orderType + " complete");
             return true;
@@ -221,7 +246,8 @@ public class ReceiptOrder : MonoBehaviour
 
     private void RemoveReceipt()
     {
-        OrderManager.Instance.CompleteReceipt(this);
+        if (OrderManager.Instance != null)
+            OrderManager.Instance.CompleteReceipt(this);
     }
 
     public void ResetOrderProgress()
@@ -234,6 +260,9 @@ public class ReceiptOrder : MonoBehaviour
         served = false;
         finishedOrder = false;
         foodBurned = false;
+
+        if (heldFoodVisuals != null)
+            heldFoodVisuals.HideAllFood();
 
         receiptText.text = receiptText.text.Replace("<s>", "");
         receiptText.text = receiptText.text.Replace("</s>", "");
