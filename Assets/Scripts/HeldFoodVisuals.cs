@@ -4,6 +4,7 @@ public class HeldFoodVisuals : MonoBehaviour
 {
     public GameObject heldPepperoniPizza;
     public GameObject heldCheesePizza;
+    public GameObject heldFries;
 
     private void Start()
     {
@@ -17,6 +18,9 @@ public class HeldFoodVisuals : MonoBehaviour
 
         if (heldCheesePizza != null)
             heldCheesePizza.SetActive(false);
+
+        if (heldFries != null)
+            heldFries.SetActive(false);
     }
 
     public void ShowPepperoniPizza()
@@ -33,5 +37,13 @@ public class HeldFoodVisuals : MonoBehaviour
 
         if (heldCheesePizza != null)
             heldCheesePizza.SetActive(true);
+    }
+
+    public void ShowFries()
+    {
+        HideAllFood();
+
+        if (heldFries != null)
+            heldFries.SetActive(true);
     }
 }
