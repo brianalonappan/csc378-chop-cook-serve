@@ -11,7 +11,7 @@ public enum OrderType
 public class ReceiptOrder : MonoBehaviour
 {
     public OrderType orderType;
-    public TextMeshPro receiptText;
+    public TMP_Text receiptText;
 
     private HeldFoodVisuals heldFoodVisuals;
 
@@ -231,8 +231,7 @@ public class ReceiptOrder : MonoBehaviour
     private void CrossOff(string taskName)
     {
         string normalText = "- " + taskName;
-        string crossedText = "<s>- " + taskName + "</s>";
-
+        string crossedText = "<color=red><s>- " + taskName + "</s></color>";
         if (receiptText.text.Contains(normalText))
         {
             receiptText.text =

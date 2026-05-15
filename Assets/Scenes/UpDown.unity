@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReceiptOrder
   orderType: 0
-  receiptText: {fileID: 0}
+  receiptText: {fileID: 1806686365}
   orderReceived: 0
   washedHands: 0
   grabbedIngredients: 0
@@ -2446,8 +2446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f483083cbffa8ac409ebfd85c56c301b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReceiptOrder
-  orderType: 0
-  receiptText: {fileID: 0}
+  orderType: 1
+  receiptText: {fileID: 530702029}
   orderReceived: 0
   washedHands: 0
   grabbedIngredients: 0
@@ -6911,8 +6911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f483083cbffa8ac409ebfd85c56c301b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReceiptOrder
-  orderType: 0
-  receiptText: {fileID: 0}
+  orderType: 2
+  receiptText: {fileID: 74832624}
   orderReceived: 0
   washedHands: 0
   grabbedIngredients: 0
