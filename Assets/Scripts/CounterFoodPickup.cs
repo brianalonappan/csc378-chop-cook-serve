@@ -10,13 +10,16 @@ public class CounterFoodPickup : MonoBehaviour
     }
 
     public FoodType foodType;
+    public AudioClip pickupSound;
 
     private bool playerInRange = false;
     private HeldFoodVisuals heldFoodVisuals;
+    private AudioSource audioSource;
 
     private void Start()
     {
         heldFoodVisuals = FindFirstObjectByType<HeldFoodVisuals>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -39,7 +42,19 @@ public class CounterFoodPickup : MonoBehaviour
                 heldFoodVisuals.ShowFries();
             }
 
-            gameObject.SetActive(false);
+            if (audioSource != null && pickupSound != null)
+            {
+                audioSource.PlayOneShot(pickupSound);
+            }
+
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+            Collider2D collider2d = GetComponent<Collider2D>();
+
+            if (spriteRenderer != null)
+                spriteRenderer.enabled = false;
+
+            if (collider2d != null)
+                collider2d.enabled = false;
         }
     }
 
