@@ -1041,9 +1041,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   receiptPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 318818890}
+  - {fileID: 1101519085}
+  - {fileID: 1970048183}
   receiptSpawnParent: {fileID: 0}
   spawnInterval: 10
   maxReceiptsOnScreen: 4
