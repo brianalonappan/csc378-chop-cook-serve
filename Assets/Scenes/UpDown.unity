@@ -278,8 +278,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.479248, y: 184.0998}
-  m_SizeDelta: {x: 258.5, y: 56.1112}
+  m_AnchoredPosition: {x: 11, y: 170}
+  m_SizeDelta: {x: 250.1468, y: 69.1052}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &74832624
 MonoBehaviour:
@@ -301,9 +301,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Receipt:\n   1 Pepperoni Pizza\n- Wash Hands\n- Grab Dough, Cheese & Pepperoni\n-
-    Stretch Dough (on chopping block)\n- Sauce Dough & Top with Cheese + Pepperoni\n-
-    Place in Oven\n- Cut pizza into 8 \n- Serve Pizza\n"
+  m_text: "Receipt: Grab at Cashier\n   1 Pepperoni Pizza\n- Wash Hands\n- Grab Dough,
+    Cheese & Pepperoni\n- Stretch Dough (on chopping block)\n- Sauce Dough & Top
+    with Cheese + Pepperoni\n- Place in Oven\n- Cut pizza into 8 \n- Serve Pizza\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
   m_sharedMaterial: {fileID: -2009315659621768855, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
@@ -330,8 +330,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31
-  m_fontSizeBase: 31
+  m_fontSize: 29
+  m_fontSizeBase: 29
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1517,8 +1517,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.479248, y: 184.0998}
-  m_SizeDelta: {x: 258.5, y: 56.1112}
+  m_AnchoredPosition: {x: 14, y: 184.0999}
+  m_SizeDelta: {x: 248.4761, y: 56.1111}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &530702029
 MonoBehaviour:
@@ -1540,9 +1540,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Receipt:\n   1 Cheese Pizza\n- Wash Hands\n- Grab Dough & Cheese\n- Stretch
-    Dough (on chopping block)\n- Sauce Dough & Top with Cheese \n- Place in Oven\n-
-    Cut pizza into 8 \n- Serve Pizza"
+  m_text: "Receipt: Grab at Cashier\n   1 Cheese Pizza\n- Wash Hands\n- Grab Dough
+    & Cheese\n- Stretch Dough (on chopping block)\n- Sauce Dough & Top with Cheese
+    \n- Place in Oven\n- Cut pizza into 8 \n- Serve Pizza"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
   m_sharedMaterial: {fileID: -2009315659621768855, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
@@ -1569,8 +1569,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3694,8 +3694,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.75, y: 181.98398}
-  m_SizeDelta: {x: 207, y: 56.1111}
+  m_AnchoredPosition: {x: 10.1212, y: 176.4151}
+  m_SizeDelta: {x: 238.7424, y: 44.9734}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1806686365
 MonoBehaviour:
@@ -3717,8 +3717,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Receipt:\n   1 French Fries\n- Wash Hands\n- Grab Potato\n- Chop Potato\n-
-    Oil & Salt Potato\n- Cook Fries\n- Serve Fries"
+  m_text: "Receipt: Grab at Cashier\n   1 French Fries\n- Wash Hands\n- Grab Potato\n-
+    Chop Potato\n- Oil & Salt Potato\n- Cook Fries\n- Serve Fries"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
   m_sharedMaterial: {fileID: -2009315659621768855, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
