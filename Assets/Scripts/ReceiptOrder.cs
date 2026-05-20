@@ -12,8 +12,11 @@ public class ReceiptOrder : MonoBehaviour
 {
     public OrderType orderType;
     public TMP_Text receiptText;
+    public Color activeTextColor = new Color(0.5f, 0.5f, 0.5f, 1f); // gray highlight
 
     private HeldFoodVisuals heldFoodVisuals;
+    private Color originalTextColor;
+    private bool hasOriginalTextColor;
 
     public bool orderReceived;
     public bool washedHands;
@@ -30,7 +33,13 @@ public class ReceiptOrder : MonoBehaviour
 
     private void Start()
     {
-        heldFoodVisuals = FindFirstObjectByType<HeldFoodVisuals>();
+        heldFoodVisuals = FindAnyObjectByType<HeldFoodVisuals>();
+
+        if (receiptText != null)
+        {
+            originalTextColor = receiptText.color;
+            hasOriginalTextColor = true;
+        }
     }
 
     public bool TryCompleteStationTask(StationType stationType)
@@ -228,6 +237,47 @@ public class ReceiptOrder : MonoBehaviour
         return false;
     }
 
+    public bool NeedsIngredient(IngredientType ingredient)
+    {
+        if (grabbedIngredients)
+            return false;
+
+        return ContainsFridgeIngredient(ingredient);
+    }
+
+    public bool ContainsFridgeIngredient(IngredientType ingredient)
+    {
+        switch (orderType)
+        {
+            case OrderType.FrenchFries:
+                return ingredient == IngredientType.Potato;
+
+            case OrderType.CheesePizza:
+                return ingredient == IngredientType.Dough ||
+                    ingredient == IngredientType.Cheese;
+
+            case OrderType.PepperoniPizza:
+                return ingredient == IngredientType.Dough ||
+                    ingredient == IngredientType.Cheese ||
+                    ingredient == IngredientType.Pepperoni;
+        }
+
+        return false;
+    }
+
+    public bool TryPickIngredient(IngredientType ingredient)
+{
+    if (!NeedsIngredient(ingredient))
+    {
+        return false;
+    }
+
+    // For now, picking any correct fridge ingredient completes the fridge step.
+    TryCompleteStationTask(StationType.Fridge);
+
+    return true;
+    }
+
     private void CrossOff(string taskName)
     {
         string normalText = "- " + taskName;
@@ -241,6 +291,20 @@ public class ReceiptOrder : MonoBehaviour
         {
             Debug.LogWarning("Task not found: " + normalText);
         }
+    }
+
+    public void SetHighlighted(bool highlighted)
+    {
+        if (receiptText == null)
+            return;
+
+        if (!hasOriginalTextColor)
+        {
+            originalTextColor = receiptText.color;
+            hasOriginalTextColor = true;
+        }
+
+        receiptText.color = highlighted ? new Color(0.3f, 0.3f, 0.3f, 1f) : originalTextColor;
     }
 
     private void RemoveReceipt()
@@ -266,4 +330,5 @@ public class ReceiptOrder : MonoBehaviour
         receiptText.text = receiptText.text.Replace("<s>", "");
         receiptText.text = receiptText.text.Replace("</s>", "");
     }
+
 }

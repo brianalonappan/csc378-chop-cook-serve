@@ -18,7 +18,7 @@ public class CounterFoodPickup : MonoBehaviour
 
     private void Start()
     {
-        heldFoodVisuals = FindFirstObjectByType<HeldFoodVisuals>();
+        heldFoodVisuals = FindAnyObjectByType<HeldFoodVisuals>();
         audioSource = GetComponent<AudioSource>();
     }
 

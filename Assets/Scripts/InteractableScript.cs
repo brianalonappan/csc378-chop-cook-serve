@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteractableScript : MonoBehaviour
 {
@@ -7,11 +8,21 @@ public class InteractableScript : MonoBehaviour
 
     public bool hasBeenInteractedWith = false;
 
+    // Scene only used for fridge
+    public string fridgeSceneName = "Fridge Detailed";
+
     public void Interact()
     {
         hasBeenInteractedWith = true;
 
         Debug.Log(stationName + " interacted with.");
+
+        // ONLY fridge loads fridge scene
+        if (stationType == StationType.Fridge)
+        {
+            SceneManager.LoadScene(fridgeSceneName);
+            return;
+        }
 
         if (OrderManager.Instance != null)
         {

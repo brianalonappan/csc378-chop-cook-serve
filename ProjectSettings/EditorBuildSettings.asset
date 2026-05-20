@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UpDown.unity
     guid: 414d33dfcc1cc8b4a8384bd6f6073ba7
+  - enabled: 1
+    path: Assets/Scenes/FridgeDetailed.unity
+    guid: 5d32f2f2508f64dfeb5d23a78cf4f686
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
