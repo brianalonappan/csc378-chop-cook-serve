@@ -514,7 +514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -567.41583, y: 416.92914}
+  m_AnchoredPosition: {x: -378.03024, y: 312.94647}
   m_SizeDelta: {x: 756.0605, y: 214.7064}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &193539795
@@ -964,6 +964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReceiptOrder
   orderType: 0
   receiptText: {fileID: 1806686365}
+  activeTextColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   orderReceived: 0
   washedHands: 0
   grabbedIngredients: 0
@@ -1049,6 +1050,7 @@ MonoBehaviour:
   receiptSpawnParent: {fileID: 0}
   spawnInterval: 10
   maxReceiptsOnScreen: 4
+  spawnReceiptsInThisScene: 1
 --- !u!1 &405169618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,6 +1914,7 @@ MonoBehaviour:
   receiptSpawnParent: {fileID: 193539794}
   spawnInterval: 2
   maxReceiptsOnScreen: 3
+  spawnReceiptsInThisScene: 1
 --- !u!4 &610524988
 Transform:
   m_ObjectHideFlags: 0
@@ -2880,6 +2883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReceiptOrder
   orderType: 1
   receiptText: {fileID: 530702029}
+  activeTextColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   orderReceived: 0
   washedHands: 0
   grabbedIngredients: 0
@@ -7447,6 +7451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReceiptOrder
   orderType: 2
   receiptText: {fileID: 74832624}
+  activeTextColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   orderReceived: 0
   washedHands: 0
   grabbedIngredients: 0
