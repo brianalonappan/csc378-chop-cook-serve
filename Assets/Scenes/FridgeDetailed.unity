@@ -644,6 +644,7 @@ MonoBehaviour:
   dropBox: {fileID: 0}
   submitOnClick: 1
   submitOnDrop: 1
+  hideWhenBagged: 1
   kitchenSceneName: UpDown
 --- !u!212 &506089938
 SpriteRenderer:
@@ -1006,6 +1007,7 @@ MonoBehaviour:
   dropBox: {fileID: 1789078670}
   submitOnClick: 1
   submitOnDrop: 1
+  hideWhenBagged: 1
   kitchenSceneName: UpDown
 --- !u!65 &709272353
 BoxCollider:
@@ -1138,6 +1140,7 @@ MonoBehaviour:
   dropBox: {fileID: 0}
   submitOnClick: 1
   submitOnDrop: 1
+  hideWhenBagged: 1
   kitchenSceneName: UpDown
 --- !u!1 &824392997
 GameObject:
@@ -1249,6 +1252,7 @@ MonoBehaviour:
   dropBox: {fileID: 0}
   submitOnClick: 1
   submitOnDrop: 1
+  hideWhenBagged: 1
   kitchenSceneName: UpDown
 --- !u!1 &961445994
 GameObject:
@@ -1593,6 +1597,7 @@ MonoBehaviour:
   dropBox: {fileID: 1789078670}
   submitOnClick: 1
   submitOnDrop: 1
+  hideWhenBagged: 1
   kitchenSceneName: UpDown
 --- !u!61 &1066504486
 BoxCollider2D:
@@ -1982,6 +1987,7 @@ MonoBehaviour:
   dropBox: {fileID: 1789078670}
   submitOnClick: 1
   submitOnDrop: 1
+  hideWhenBagged: 1
   kitchenSceneName: UpDown
 --- !u!61 &1376269307
 BoxCollider2D:
@@ -2370,17 +2376,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.000000029802322}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9, y: 0.62}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.52941173}
   m_EdgeRadius: 0
 --- !u!212 &1789078672
 SpriteRenderer:
@@ -2431,7 +2437,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -50
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2000726247262814106, guid: fe96814b383ab4362861893207699446, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2568,6 +2574,7 @@ MonoBehaviour:
   dropBox: {fileID: 1789078670}
   submitOnClick: 1
   submitOnDrop: 1
+  hideWhenBagged: 1
   kitchenSceneName: UpDown
 --- !u!61 &1876076804
 BoxCollider2D:
@@ -2725,6 +2732,7 @@ MonoBehaviour:
   dropBox: {fileID: 0}
   submitOnClick: 1
   submitOnDrop: 1
+  hideWhenBagged: 1
   kitchenSceneName: UpDown
 --- !u!1 &2045396474
 GameObject:
