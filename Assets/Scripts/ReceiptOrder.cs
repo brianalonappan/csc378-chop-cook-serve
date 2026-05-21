@@ -247,22 +247,7 @@ public class ReceiptOrder : MonoBehaviour
 
     public bool ContainsFridgeIngredient(IngredientType ingredient)
     {
-        switch (orderType)
-        {
-            case OrderType.FrenchFries:
-                return ingredient == IngredientType.Potato;
-
-            case OrderType.CheesePizza:
-                return ingredient == IngredientType.Dough ||
-                    ingredient == IngredientType.Cheese;
-
-            case OrderType.PepperoniPizza:
-                return ingredient == IngredientType.Dough ||
-                    ingredient == IngredientType.Cheese ||
-                    ingredient == IngredientType.Pepperoni;
-        }
-
-        return false;
+        return OrderState.OrderUsesIngredient(orderType, ingredient);
     }
 
     public bool TryPickIngredient(IngredientType ingredient)

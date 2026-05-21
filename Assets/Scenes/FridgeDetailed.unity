@@ -640,6 +640,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeIngredient
   ingredientType: 0
   highlight: {fileID: 506089935}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
+  dropBox: {fileID: 0}
+  submitOnClick: 1
+  submitOnDrop: 1
   kitchenSceneName: UpDown
 --- !u!212 &506089938
 SpriteRenderer:
@@ -751,6 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FridgeActiveOrderDisplay
   orderText: {fileID: 0}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
 --- !u!114 &560110959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,6 +905,7 @@ GameObject:
   - component: {fileID: 709272350}
   - component: {fileID: 709272351}
   - component: {fileID: 709272352}
+  - component: {fileID: 709272353}
   m_Layer: 0
   m_Name: foodinfridge_1
   m_TagString: Untagged
@@ -996,7 +1002,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeIngredient
   ingredientType: 3
   highlight: {fileID: 776957020}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
+  dropBox: {fileID: 1789078670}
+  submitOnClick: 1
+  submitOnDrop: 1
   kitchenSceneName: UpDown
+--- !u!65 &709272353
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709272349}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.125, y: 2.3125, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &776957020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,6 +1134,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeIngredient
   ingredientType: 3
   highlight: {fileID: 776957020}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
+  dropBox: {fileID: 0}
+  submitOnClick: 1
+  submitOnDrop: 1
   kitchenSceneName: UpDown
 --- !u!1 &824392997
 GameObject:
@@ -1210,6 +1245,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeIngredient
   ingredientType: 1
   highlight: {fileID: 824392997}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
+  dropBox: {fileID: 0}
+  submitOnClick: 1
+  submitOnDrop: 1
   kitchenSceneName: UpDown
 --- !u!1 &961445994
 GameObject:
@@ -1453,6 +1492,7 @@ GameObject:
   - component: {fileID: 1066504483}
   - component: {fileID: 1066504484}
   - component: {fileID: 1066504485}
+  - component: {fileID: 1066504486}
   m_Layer: 0
   m_Name: foodinfridge_0
   m_TagString: Untagged
@@ -1549,7 +1589,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeIngredient
   ingredientType: 0
   highlight: {fileID: 506089935}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
+  dropBox: {fileID: 1789078670}
+  submitOnClick: 1
+  submitOnDrop: 1
   kitchenSceneName: UpDown
+--- !u!61 &1066504486
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066504482}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.5625, y: 1.8125}
+    newSize: {x: 2.5625, y: 1.8125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.5625, y: 1.8125}
+  m_EdgeRadius: 0
 --- !u!1 &1197236021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,9 +1674,13 @@ MonoBehaviour:
   - {fileID: 2045396476}
   - {fileID: 961445996}
   receiptSpawnParent: {fileID: 368119337}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
   spawnInterval: 2
   maxReceiptsOnScreen: 3
   spawnReceiptsInThisScene: 0
+  resetOrderStateOnStart: 1
+  kitchenSceneName: UpDown
+  fridgeSceneName: FridgeDetailed
 --- !u!4 &1197236023
 Transform:
   m_ObjectHideFlags: 0
@@ -1787,6 +1881,7 @@ GameObject:
   - component: {fileID: 1376269304}
   - component: {fileID: 1376269305}
   - component: {fileID: 1376269306}
+  - component: {fileID: 1376269307}
   m_Layer: 0
   m_Name: foodinfridge_2
   m_TagString: Untagged
@@ -1883,7 +1978,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeIngredient
   ingredientType: 1
   highlight: {fileID: 824392997}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
+  dropBox: {fileID: 1789078670}
+  submitOnClick: 1
+  submitOnDrop: 1
   kitchenSceneName: UpDown
+--- !u!61 &1376269307
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376269303}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.8125, y: 1.75}
+    newSize: {x: 1.8125, y: 1.75}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.8125, y: 1.75}
+  m_EdgeRadius: 0
 --- !u!1 &1511831846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,6 +2304,158 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571050719}
   m_CullTransparentMesh: 1
+--- !u!1 &1789078669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789078673}
+  - component: {fileID: 1789078672}
+  - component: {fileID: 1789078671}
+  - component: {fileID: 1789078670}
+  m_Layer: 0
+  m_Name: Square
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1789078670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789078669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab0b22964dd46f49a1884b1e5fdbf0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FridgeIngredientDropBox
+  boxCollider: {fileID: 1789078671}
+--- !u!61 &1789078671
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789078669}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!212 &1789078672
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789078669}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -50
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+--- !u!4 &1789078673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789078669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.265257, y: -0.39115202, z: 0}
+  m_LocalScale: {x: 4.25, y: 4.25, z: 4.25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1876076800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,6 +2467,7 @@ GameObject:
   - component: {fileID: 1876076801}
   - component: {fileID: 1876076802}
   - component: {fileID: 1876076803}
+  - component: {fileID: 1876076804}
   m_Layer: 0
   m_Name: foodinfridge_3
   m_TagString: Untagged
@@ -2266,7 +2564,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeIngredient
   ingredientType: 2
   highlight: {fileID: 2018521311}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
+  dropBox: {fileID: 1789078670}
+  submitOnClick: 1
+  submitOnDrop: 1
   kitchenSceneName: UpDown
+--- !u!61 &1876076804
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876076800}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.5, y: 1.375}
+    newSize: {x: 2.5, y: 1.375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.5, y: 1.375}
+  m_EdgeRadius: 0
 --- !u!1 &2018521311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,6 +2721,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FridgeIngredient
   ingredientType: 2
   highlight: {fileID: 2018521311}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
+  dropBox: {fileID: 0}
+  submitOnClick: 1
+  submitOnDrop: 1
   kitchenSceneName: UpDown
 --- !u!1 &2045396474
 GameObject:
@@ -2593,3 +2945,4 @@ SceneRoots:
   - {fileID: 992594920}
   - {fileID: 2108863925}
   - {fileID: 368119337}
+  - {fileID: 1789078673}

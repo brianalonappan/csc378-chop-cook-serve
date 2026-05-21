@@ -20,6 +20,9 @@ public class InteractableScript : MonoBehaviour
         // ONLY fridge loads fridge scene
         if (stationType == StationType.Fridge)
         {
+            if (OrderManager.Instance != null)
+                OrderManager.Instance.PrepareForSceneLoad();
+
             SceneManager.LoadScene(fridgeSceneName);
             return;
         }

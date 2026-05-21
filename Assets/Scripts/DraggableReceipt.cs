@@ -19,7 +19,7 @@ public class DraggableReceipt : MonoBehaviour,
         rectTransform = GetComponent<RectTransform>();
         originalScale = rectTransform.localScale;
 
-        canvas = GetComponentInParent<Canvas>();
+        RefreshCanvas();
         canvasGroup = GetComponent<CanvasGroup>();
 
         // Add CanvasGroup automatically if missing
@@ -31,6 +31,9 @@ public class DraggableReceipt : MonoBehaviour,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!RefreshCanvas())
+            return;
+
         originalParent = transform.parent;
 
         // Allows drop zones underneath to detect
@@ -53,6 +56,9 @@ public class DraggableReceipt : MonoBehaviour,
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!RefreshCanvas())
+            return;
+
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
             eventData.position,
@@ -67,5 +73,21 @@ public class DraggableReceipt : MonoBehaviour,
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = true;
+    }
+
+    private bool RefreshCanvas()
+    {
+        if (canvas != null)
+            return true;
+
+        canvas = GetComponentInParent<Canvas>();
+
+        if (canvas == null)
+        {
+            Debug.LogWarning("DraggableReceipt could not find a parent Canvas.");
+            return false;
+        }
+
+        return true;
     }
 }

@@ -999,58 +999,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!1 &326028084
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 326028085}
-  - component: {fileID: 326028086}
-  m_Layer: 0
-  m_Name: OrderManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &326028085
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326028084}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1553727600}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &326028086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326028084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63ecca7715b17a345a48a67df00e776b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  receiptPrefabs:
-  - {fileID: 318818890}
-  - {fileID: 1101519085}
-  - {fileID: 1970048183}
-  receiptSpawnParent: {fileID: 0}
-  spawnInterval: 10
-  maxReceiptsOnScreen: 4
-  spawnReceiptsInThisScene: 1
 --- !u!1 &405169618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1908,13 +1856,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrderManager
   receiptPrefabs:
-  - {fileID: 318818890}
-  - {fileID: 1101519085}
-  - {fileID: 1970048183}
+  - {fileID: 4830193561866829795, guid: 6f4fc2dd6f8fb417daee56c1dd533562, type: 3}
+  - {fileID: 7604886167844739016, guid: 5c415acf4f102489b826f6d8b71e4ee6, type: 3}
+  - {fileID: 959433129792890658, guid: 69b71b463b13c46a98a1c9c8125bb87a, type: 3}
   receiptSpawnParent: {fileID: 193539794}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
   spawnInterval: 2
   maxReceiptsOnScreen: 3
   spawnReceiptsInThisScene: 1
+  resetOrderStateOnStart: 1
+  kitchenSceneName: UpDown
+  fridgeSceneName: FridgeDetailed
 --- !u!4 &610524988
 Transform:
   m_ObjectHideFlags: 0
@@ -3521,7 +3473,6 @@ Transform:
   - {fileID: 1139088888}
   - {fileID: 1829950895}
   - {fileID: 1849450627}
-  - {fileID: 326028085}
   m_Father: {fileID: 15234788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1656666460

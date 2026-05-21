@@ -4,6 +4,7 @@ using UnityEngine;
 public class FridgeActiveOrderDisplay : MonoBehaviour
 {
     public TMP_Text orderText;
+    public OrderState orderState;
 
     private void Start()
     {
@@ -33,22 +34,29 @@ public class FridgeActiveOrderDisplay : MonoBehaviour
         if (orderText == null)
             return;
 
-        if (OrderManager.Instance == null)
+        OrderState state = GetOrderState();
+
+        if (state == null)
         {
-            orderText.text = "Active Order: (OrderManager missing)";
+            orderText.text = "Active Order: (OrderState missing)";
             return;
         }
 
-        var activeReceipt = OrderManager.Instance.ActiveReceipt;
-        Debug.Log($"[FridgeDisplay] Instance exists: true, ActiveReceipt: {(activeReceipt == null ? "NULL" : activeReceipt.orderType.ToString())}");
-
-        if (activeReceipt == null)
+        if (!state.hasActiveOrder)
         {
             orderText.text = "Active Order: None";
             return;
         }
 
-        orderText.text = $"Active Order: {GetOrderName(activeReceipt.orderType)}";
+        orderText.text = $"Active Order: {GetOrderName(state.activeOrderType)}";
+    }
+
+    private OrderState GetOrderState()
+    {
+        if (orderState != null)
+            return orderState;
+
+        return OrderManager.Instance != null ? OrderManager.Instance.State : null;
     }
 
     private string GetOrderName(OrderType orderType)

@@ -20,10 +20,14 @@ public class OrderManager : MonoBehaviour
 
     public ReceiptOrder[] receiptPrefabs;
     public Transform receiptSpawnParent; // drag ReceiptLine here
+    public OrderState orderState;
 
     public float spawnInterval = 20f;
     public int maxReceiptsOnScreen = 3;
     public bool spawnReceiptsInThisScene = true;
+    public bool resetOrderStateOnStart = true;
+    public string kitchenSceneName = "UpDown";
+    public string fridgeSceneName = "FridgeDetailed";
 
     private List<ReceiptOrder> receiptQueue = new List<ReceiptOrder>();
     private ReceiptOrder activeReceipt;
@@ -32,6 +36,7 @@ public class OrderManager : MonoBehaviour
     private RectTransform persistentReceiptParent;
 
     public ReceiptOrder ActiveReceipt => activeReceipt;
+    public OrderState State => orderState;
     public static ReceiptOrder GlobalActiveReceipt => Instance?.activeReceipt;
     public OrderType? ActiveOrderType => activeReceipt != null ? activeReceipt.orderType : (OrderType?)null;
     public static OrderType? GlobalActiveOrderType => Instance?.activeReceipt?.orderType;
@@ -40,6 +45,11 @@ public class OrderManager : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
+            if (_instance.orderState == null && orderState != null)
+            {
+                _instance.orderState = orderState;
+            }
+
             if (_instance.receiptSpawnParent == null && receiptSpawnParent != null)
             {
                 _instance.receiptSpawnParent = receiptSpawnParent;
@@ -59,18 +69,29 @@ public class OrderManager : MonoBehaviour
     private void OnDestroy()
     {
         if (_instance == this)
+        {
             SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        var foundLine = GameObject.Find("ReceiptLine")?.transform;
-        if (foundLine != null)
+        bool isFridgeScene = scene.name == fridgeSceneName;
+
+        if (isFridgeScene)
         {
-            receiptSpawnParent = foundLine;
+            receiptSpawnParent = persistentReceiptParent;
         }
-        // Don't hide canvas just because this scene has no ReceiptLine
-        // The persistent canvas stays visible always
+        else
+        {
+            var foundLine = GameObject.Find("ReceiptLine")?.transform;
+            receiptSpawnParent = foundLine != null ? foundLine : persistentReceiptParent;
+        }
+
+        ReparentPersistentReceipts();
+
+        if (persistentReceiptCanvas != null)
+            persistentReceiptCanvas.SetActive(!isFridgeScene && receiptSpawnParent == persistentReceiptParent);
     }
 
     private void CreatePersistentReceiptCanvas()
@@ -119,15 +140,35 @@ public class OrderManager : MonoBehaviour
         }
     }
 
+    public void PrepareForSceneLoad()
+    {
+        if (persistentReceiptParent == null)
+            return;
+
+        receiptSpawnParent = persistentReceiptParent;
+        ReparentPersistentReceipts();
+
+        if (persistentReceiptCanvas != null)
+            persistentReceiptCanvas.SetActive(false);
+
+        PublishActiveOrderState();
+    }
+
     private void Start()
     {
         if (!spawnReceiptsInThisScene)
         {
             Debug.Log("OrderManager in this scene will not spawn receipts.");
+            PublishActiveOrderState();
             return;
         }
 
         Debug.Log("OrderManager started. Prefabs: " + (receiptPrefabs == null ? 0 : receiptPrefabs.Length));
+
+        if (resetOrderStateOnStart && orderState != null)
+        {
+            orderState.Clear();
+        }
 
         if (receiptSpawnParent == null)
         {
@@ -184,16 +225,37 @@ public class OrderManager : MonoBehaviour
             return;
         }
 
-        int randomIndex = Random.Range(0, receiptPrefabs.Length);
+        List<ReceiptOrder> availablePrefabs = new List<ReceiptOrder>();
+        for (int i = 0; i < receiptPrefabs.Length; i++)
+        {
+            if (receiptPrefabs[i] == null)
+            {
+                Debug.LogError("Receipt prefab slot " + i + " is missing. Reassign it on the OrderManager.");
+                continue;
+            }
+
+            availablePrefabs.Add(receiptPrefabs[i]);
+        }
+
+        if (availablePrefabs.Count == 0)
+        {
+            Debug.LogError("Cannot spawn receipt: all receipt prefab slots are missing.");
+            return;
+        }
+
+        int randomIndex = Random.Range(0, availablePrefabs.Count);
 
         ReceiptOrder newReceipt = Instantiate(
-            receiptPrefabs[randomIndex],
+            availablePrefabs[randomIndex],
             receiptSpawnParent
         );
 
         RectTransform rect = newReceipt.GetComponent<RectTransform>();
-        rect.anchoredPosition = Vector2.zero;
-        rect.localScale = Vector3.one * 0.6f;
+        if (rect != null)
+        {
+            rect.anchoredPosition = Vector2.zero;
+            rect.localScale = Vector3.one * 0.6f;
+        }
 
         receiptQueue.Add(newReceipt);
         newReceipt.SetHighlighted(false);
@@ -217,6 +279,8 @@ public class OrderManager : MonoBehaviour
         Debug.Log(activeReceipt != null
             ? activeReceipt.orderType + " is now active."
             : "Active receipt cleared.");
+
+        PublishActiveOrderState();
     }
 
     public void TryUseStation(StationType stationType)
@@ -232,6 +296,7 @@ public class OrderManager : MonoBehaviour
 
         if (completedSomething)
         {
+            PublishActiveOrderState();
             Debug.Log("Worked on active receipt.");
         }
         else
@@ -256,11 +321,17 @@ public class OrderManager : MonoBehaviour
                 activeReceipt.SetHighlighted(true);
         }
 
+        PublishActiveOrderState();
         Destroy(completedReceipt.gameObject);
     }
 
     public bool ActiveReceiptNeedsIngredient(IngredientType ingredient)
     {
+        if (orderState != null && orderState.hasActiveOrder)
+        {
+            return orderState.ActiveOrderNeedsIngredient(ingredient);
+        }
+
         if (activeReceipt == null)
         {
             return false;
@@ -271,6 +342,11 @@ public class OrderManager : MonoBehaviour
 
     public bool ActiveReceiptUsesIngredient(IngredientType ingredient)
     {
+        if (orderState != null && orderState.hasActiveOrder)
+        {
+            return orderState.ActiveOrderUsesIngredient(ingredient);
+        }
+
         if (activeReceipt == null)
         {
             return false;
@@ -291,11 +367,33 @@ public class OrderManager : MonoBehaviour
 
         if (pickedCorrectIngredient)
         {
+            PublishActiveOrderState();
             Debug.Log("Picked correct ingredient: " + ingredient);
         }
         else
         {
             Debug.Log("Wrong ingredient: " + ingredient);
         }
-}
+    }
+
+    public bool CompleteFridgeIngredientsForActiveReceipt()
+    {
+        if (activeReceipt == null)
+        {
+            Debug.Log("No active receipt.");
+            return false;
+        }
+
+        bool completedFridgeStep = activeReceipt.TryCompleteStationTask(StationType.Fridge);
+        PublishActiveOrderState();
+        return completedFridgeStep;
+    }
+
+    public void PublishActiveOrderState()
+    {
+        if (orderState == null)
+            return;
+
+        orderState.CaptureFromReceipt(activeReceipt);
+    }
 }
