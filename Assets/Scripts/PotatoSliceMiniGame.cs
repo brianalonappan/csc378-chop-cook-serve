@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PotatoSliceMinigame : MonoBehaviour
 {
     public GameObject[] cutMarks;
+    public GameObject rawFries;
+    public SpriteRenderer potatoRenderer;
     public string returnSceneName = "UpDown";
 
     private int sliceCount = 0;
+    private bool finished = false;
 
     private void Start()
     {
@@ -17,11 +21,24 @@ public class PotatoSliceMinigame : MonoBehaviour
                 cutMarks[i].SetActive(false);
             }
         }
+
+        if (rawFries != null)
+        {
+            rawFries.SetActive(false);
+        }
+
+        if (potatoRenderer == null)
+        {
+            potatoRenderer = GetComponent<SpriteRenderer>();
+        }
     }
 
     private void OnMouseDown()
     {
-        SlicePotato();
+        if (!finished)
+        {
+            SlicePotato();
+        }
     }
 
     private void SlicePotato()
@@ -39,13 +56,38 @@ public class PotatoSliceMinigame : MonoBehaviour
 
         if (sliceCount >= cutMarks.Length)
         {
-            FinishSlicing();
+            finished = true;
+            StartCoroutine(FinishSlicing());
         }
     }
 
-    private void FinishSlicing()
+    private IEnumerator FinishSlicing()
     {
-        Debug.Log("Potato slicing complete.");
+        if (potatoRenderer != null)
+        {
+            potatoRenderer.enabled = false;
+        }
+
+        for (int i = 0; i < cutMarks.Length; i++)
+        {
+            if (cutMarks[i] != null)
+            {
+                cutMarks[i].SetActive(false);
+            }
+        }
+
+        if (rawFries != null)
+        {
+            rawFries.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(2.5f);
+
+        if (OrderManager.Instance != null && OrderManager.Instance.ActiveReceipt != null)
+        {
+            OrderManager.Instance.ActiveReceipt.CompletePotatoChopping();
+        }
+
         SceneManager.LoadScene(returnSceneName);
     }
 }

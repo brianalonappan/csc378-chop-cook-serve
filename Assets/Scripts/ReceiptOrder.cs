@@ -107,8 +107,7 @@ public class ReceiptOrder : MonoBehaviour
             grabbedIngredients &&
             !choppedOrStretched)
         {
-            choppedOrStretched = true;
-            CrossOff("Chop Potato");
+            Debug.Log("Entered potato chopping minigame");
             return true;
         }
 
@@ -314,6 +313,20 @@ public class ReceiptOrder : MonoBehaviour
 
         receiptText.text = receiptText.text.Replace("<s>", "");
         receiptText.text = receiptText.text.Replace("</s>", "");
+    }
+
+    public bool CompletePotatoChopping()
+    {
+        if (orderType != OrderType.FrenchFries)
+            return false;
+
+        if (!grabbedIngredients || choppedOrStretched)
+            return false;
+
+        choppedOrStretched = true;
+        CrossOff("Chop Potato");
+        Debug.Log("Potato chopping complete from minigame");
+        return true;
     }
 
 }
