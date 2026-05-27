@@ -273,7 +273,18 @@ public class ReceiptOrder : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Task not found: " + normalText);
+            string wrappedText = "-\n    " + taskName;
+            string crossedWrappedText = "<color=red><s>-\n    " + taskName + "</s></color>";
+
+            if (receiptText.text.Contains(wrappedText))
+            {
+                receiptText.text =
+                    receiptText.text.Replace(wrappedText, crossedWrappedText);
+            }
+            else
+            {
+                Debug.LogWarning("Task not found: " + normalText);
+            }
         }
     }
 

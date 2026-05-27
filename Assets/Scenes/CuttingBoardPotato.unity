@@ -247,6 +247,7 @@ MonoBehaviour:
   - {fileID: 839539925}
   rawFries: {fileID: 2115830875}
   potatoRenderer: {fileID: 395071930}
+  orderState: {fileID: 11400000, guid: 18d7817f38ab4b2c8f40b315a40e8b9a, type: 2}
   returnSceneName: UpDown
 --- !u!61 &395071929
 BoxCollider2D:

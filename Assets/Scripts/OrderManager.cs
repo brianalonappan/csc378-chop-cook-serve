@@ -305,6 +305,31 @@ public class OrderManager : MonoBehaviour
         }
     }
 
+    public bool ActiveReceiptNeedsPotatoChopping()
+    {
+        return activeReceipt != null &&
+            activeReceipt.orderType == OrderType.FrenchFries &&
+            activeReceipt.grabbedIngredients &&
+            !activeReceipt.choppedOrStretched &&
+            !activeReceipt.finishedOrder;
+    }
+
+    public bool CompletePotatoChoppingForActiveReceipt()
+    {
+        if (activeReceipt == null)
+        {
+            Debug.Log("No active receipt.");
+            return false;
+        }
+
+        bool completedPotatoChopping = activeReceipt.CompletePotatoChopping();
+
+        if (completedPotatoChopping)
+            PublishActiveOrderState();
+
+        return completedPotatoChopping;
+    }
+
     public void CompleteReceipt(ReceiptOrder completedReceipt)
     {
         if (receiptQueue.Contains(completedReceipt))

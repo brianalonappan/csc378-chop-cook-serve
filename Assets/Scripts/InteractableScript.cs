@@ -8,8 +8,9 @@ public class InteractableScript : MonoBehaviour
 
     public bool hasBeenInteractedWith = false;
 
-    // Scene only used for fridge
+    // Scene names used by stations that open focused interaction views.
     public string fridgeSceneName = "Fridge Detailed";
+    public string potatoCuttingSceneName = "CuttingBoardPotato";
 
     public void Interact()
     {
@@ -17,13 +18,21 @@ public class InteractableScript : MonoBehaviour
 
         Debug.Log(stationName + " interacted with.");
 
-        // ONLY fridge loads fridge scene
         if (stationType == StationType.Fridge)
         {
             if (OrderManager.Instance != null)
                 OrderManager.Instance.PrepareForSceneLoad();
 
             SceneManager.LoadScene(fridgeSceneName);
+            return;
+        }
+
+        if (stationType == StationType.ChoppingBlock &&
+            OrderManager.Instance != null &&
+            OrderManager.Instance.ActiveReceiptNeedsPotatoChopping())
+        {
+            OrderManager.Instance.PrepareForSceneLoad();
+            SceneManager.LoadScene(potatoCuttingSceneName);
             return;
         }
 

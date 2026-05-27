@@ -7,6 +7,7 @@ public class PotatoSliceMinigame : MonoBehaviour
     public GameObject[] cutMarks;
     public GameObject rawFries;
     public SpriteRenderer potatoRenderer;
+    public OrderState orderState;
     public string returnSceneName = "UpDown";
 
     private int sliceCount = 0;
@@ -83,11 +84,55 @@ public class PotatoSliceMinigame : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
 
-        if (OrderManager.Instance != null && OrderManager.Instance.ActiveReceipt != null)
+        CompletePotatoChoppingAndReturnToKitchen();
+    }
+
+    private void CompletePotatoChoppingAndReturnToKitchen()
+    {
+        if (OrderManager.Instance == null)
         {
-            OrderManager.Instance.ActiveReceipt.CompletePotatoChopping();
+            Debug.LogError("PotatoSliceMinigame: OrderManager instance is missing.");
+            return;
         }
 
-        SceneManager.LoadScene(returnSceneName);
+        OrderState state = GetOrderState();
+        bool readyForPotatoChopping = state?.hasActiveOrder == true &&
+            state.activeOrderType == OrderType.FrenchFries &&
+            state.grabbedIngredients &&
+            !state.choppedOrStretched;
+
+        if (!readyForPotatoChopping && !OrderManager.Instance.ActiveReceiptNeedsPotatoChopping())
+        {
+            Debug.Log("Potato chopping is not ready for the active receipt.");
+            return;
+        }
+
+        if (!OrderManager.Instance.CompletePotatoChoppingForActiveReceipt())
+        {
+            Debug.Log("Potato was cut, but the active receipt did not accept the chopping step.");
+            return;
+        }
+
+        string sceneToLoad = !string.IsNullOrEmpty(OrderManager.Instance.kitchenSceneName)
+            ? OrderManager.Instance.kitchenSceneName
+            : returnSceneName;
+
+        if (!Application.CanStreamedLevelBeLoaded(sceneToLoad))
+        {
+            Debug.LogError("Cannot load scene: " + sceneToLoad + ". Check that it is added to Build Settings and the name is correct.");
+            return;
+        }
+
+        Debug.Log("Loading kitchen scene: " + sceneToLoad);
+        OrderManager.Instance.PrepareForSceneLoad();
+        SceneManager.LoadScene(sceneToLoad);
+    }
+
+    private OrderState GetOrderState()
+    {
+        if (orderState != null)
+            return orderState;
+
+        return OrderManager.Instance != null ? OrderManager.Instance.State : null;
     }
 }
