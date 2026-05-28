@@ -57,6 +57,7 @@ public class ReceiptOrder : MonoBehaviour
         if (stationType == StationType.Cashier && !orderReceived)
         {
             orderReceived = true;
+            CrossOff("Grab at Cashier");
             Debug.Log(orderType + " order received");
             return true;
         }
@@ -283,7 +284,15 @@ public class ReceiptOrder : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Task not found: " + normalText);
+                if (receiptText.text.Contains(taskName))
+                {
+                    receiptText.text =
+                        receiptText.text.Replace(taskName, "<color=red><s>" + taskName + "</s></color>");
+                }
+                else
+                {
+                    Debug.LogWarning("Task not found: " + normalText);
+                }
             }
         }
     }
