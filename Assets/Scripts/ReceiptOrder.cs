@@ -340,4 +340,18 @@ public class ReceiptOrder : MonoBehaviour
         return true;
     }
 
+    public bool CompletePotatoMixing()
+    {
+        if (orderType != OrderType.FrenchFries)
+            return false;
+
+        if (!choppedOrStretched || addedToppings)
+            return false;
+
+        addedToppings = true;
+        CrossOff("Oil & Salt Potato");
+        Debug.Log("Potato oil and salt complete from mix minigame");
+        return true;
+    }
+
 }

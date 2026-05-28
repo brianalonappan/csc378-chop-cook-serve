@@ -314,6 +314,15 @@ public class OrderManager : MonoBehaviour
             !activeReceipt.finishedOrder;
     }
 
+    public bool ActiveReceiptNeedsPotatoMixing()
+    {
+        return activeReceipt != null &&
+            activeReceipt.orderType == OrderType.FrenchFries &&
+            activeReceipt.choppedOrStretched &&
+            !activeReceipt.addedToppings &&
+            !activeReceipt.finishedOrder;
+    }
+
     public bool CompletePotatoChoppingForActiveReceipt()
     {
         if (activeReceipt == null)
@@ -328,6 +337,22 @@ public class OrderManager : MonoBehaviour
             PublishActiveOrderState();
 
         return completedPotatoChopping;
+    }
+
+    public bool CompletePotatoMixingForActiveReceipt()
+    {
+        if (activeReceipt == null)
+        {
+            Debug.Log("No active receipt.");
+            return false;
+        }
+
+        bool completedPotatoMixing = activeReceipt.CompletePotatoMixing();
+
+        if (completedPotatoMixing)
+            PublishActiveOrderState();
+
+        return completedPotatoMixing;
     }
 
     public void CompleteReceipt(ReceiptOrder completedReceipt)

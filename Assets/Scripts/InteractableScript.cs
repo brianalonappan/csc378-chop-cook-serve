@@ -11,6 +11,7 @@ public class InteractableScript : MonoBehaviour
     // Scene names used by stations that open focused interaction views.
     public string fridgeSceneName = "Fridge Detailed";
     public string potatoCuttingSceneName = "CuttingBoardPotato";
+    public string potatoMixSceneName = "MixPotato";
 
     public void Interact()
     {
@@ -33,6 +34,15 @@ public class InteractableScript : MonoBehaviour
         {
             OrderManager.Instance.PrepareForSceneLoad();
             SceneManager.LoadScene(potatoCuttingSceneName);
+            return;
+        }
+
+        if (stationType == StationType.ToppingsTable &&
+            OrderManager.Instance != null &&
+            OrderManager.Instance.ActiveReceiptNeedsPotatoMixing())
+        {
+            OrderManager.Instance.PrepareForSceneLoad();
+            SceneManager.LoadScene(potatoMixSceneName);
             return;
         }
 
