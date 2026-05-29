@@ -363,4 +363,45 @@ public class ReceiptOrder : MonoBehaviour
         return true;
     }
 
+    public StationType? GetNextStation()
+    {
+        if (finishedOrder)
+            return null;
+
+        if (!orderReceived)
+            return StationType.Cashier;
+
+        if (!washedHands)
+            return StationType.Sink;
+
+        if (!grabbedIngredients)
+            return StationType.Fridge;
+
+        if (!choppedOrStretched)
+            return StationType.ChoppingBlock;
+
+        if (!addedToppings)
+            return StationType.ToppingsTable;
+
+        if (!cookedOrBaked)
+        {
+            if (orderType == OrderType.FrenchFries)
+                return StationType.Stove;
+
+            return StationType.Oven;
+        }
+
+        if ((orderType == OrderType.CheesePizza ||
+             orderType == OrderType.PepperoniPizza)
+             && !cutPizza)
+        {
+            return StationType.ChoppingBlock;
+        }
+
+        if (!served)
+            return StationType.DropOff;
+
+        return null;
+    }
+
 }
