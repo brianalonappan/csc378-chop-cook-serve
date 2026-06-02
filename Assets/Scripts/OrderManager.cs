@@ -156,14 +156,24 @@ public class OrderManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(DelayedStart());
+    }
+
+    private IEnumerator DelayedStart()
+    {
+        Debug.Log("OrderManager waiting 1 seconds before starting...");
+
+        yield return new WaitForSeconds(1f);
+
         if (!spawnReceiptsInThisScene)
         {
             Debug.Log("OrderManager in this scene will not spawn receipts.");
             PublishActiveOrderState();
-            return;
+            yield break;
         }
 
-        Debug.Log("OrderManager started. Prefabs: " + (receiptPrefabs == null ? 0 : receiptPrefabs.Length));
+        Debug.Log("OrderManager started after delay. Prefabs: " +
+            (receiptPrefabs == null ? 0 : receiptPrefabs.Length));
 
         if (resetOrderStateOnStart && orderState != null)
         {
@@ -173,9 +183,10 @@ public class OrderManager : MonoBehaviour
         if (receiptSpawnParent == null)
         {
             receiptSpawnParent = GameObject.Find("ReceiptLine")?.transform ?? persistentReceiptParent;
+
             if (receiptSpawnParent != null && receiptSpawnParent != persistentReceiptParent)
             {
-                Debug.Log("Found scene ReceiptLine at runtime and assigned receiptSpawnParent.");
+                Debug.Log("Found scene ReceiptLine after delay.");
             }
             else if (receiptSpawnParent == persistentReceiptParent)
             {
@@ -184,18 +195,28 @@ public class OrderManager : MonoBehaviour
         }
 
         if (persistentReceiptCanvas != null)
+        {
             persistentReceiptCanvas.SetActive(receiptSpawnParent == persistentReceiptParent);
+        }
 
         ReparentPersistentReceipts();
 
         if (receiptPrefabs == null || receiptPrefabs.Length == 0)
         {
             Debug.LogError("No receiptPrefabs assigned! Add at least one ReceiptOrder prefab.");
-            return;
+            yield break;
+        }
+
+        if (receiptSpawnParent == null)
+        {
+            Debug.LogError("Cannot spawn receipt: receiptSpawnParent is missing.");
+            yield break;
         }
 
         SpawnRandomReceipt();
         StartCoroutine(SpawnReceiptRoutine());
+
+        Debug.Log("OrderManager finished delayed setup.");
     }
 
     private IEnumerator SpawnReceiptRoutine()
