@@ -24,11 +24,28 @@ public class StationAlertManager : MonoBehaviour
         if (activeOrder != null)
             nextStation = activeOrder.GetNextStation();
 
+        if (nextStation == StationType.Cashier && !CustomerReachedRegister())
+            nextStation = null;
+
         if (nextStation == lastStation)
             return;
 
         lastStation = nextStation;
         ShowOnlyAlert(nextStation);
+    }
+
+    private bool CustomerReachedRegister()
+    {
+        if (OrderManager.Instance == null)
+            return false;
+
+        if (OrderManager.Instance.customerObject == null)
+            return false;
+
+        CustomerWalker walker =
+            OrderManager.Instance.customerObject.GetComponent<CustomerWalker>();
+
+        return walker != null && walker.reachedRegister;
     }
 
     private void ShowOnlyAlert(StationType? station)
