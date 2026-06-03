@@ -12,43 +12,61 @@ public class PizzaPepperoniSource : MonoBehaviour
     private Vector3 dragOffset;
     private bool isDragging;
     private int placedSlices = 0;
+    private Collider2D sourceCollider;
+
+    private void Awake()
+    {
+        sourceCollider = GetComponent<Collider2D>();
+    }
 
     private void Start()
     {
-        startPosition = transform.position;
-
         if (dropBox == null)
             dropBox = FindAnyObjectByType<PizzaPepperoniDropBox>();
 
         EnsureCollider();
+        startPosition = transform.position;
     }
 
-    private void OnMouseDown()
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+            TryStartDrag();
+
+        if (Input.GetMouseButton(0) && isDragging)
+            DragToPointer();
+
+        if (Input.GetMouseButtonUp(0) && isDragging)
+            FinishDrag();
+    }
+
+    private void TryStartDrag()
     {
         Vector3 mouseWorldPosition = GetMouseWorldPosition();
+        if (sourceCollider == null || !sourceCollider.OverlapPoint(mouseWorldPosition))
+            return;
+
+        startPosition = transform.position;
         dragOffset = transform.position - mouseWorldPosition;
-        isDragging = false;
+        isDragging = true;
     }
 
-    private void OnMouseDrag()
+    private void DragToPointer()
     {
-        isDragging = true;
         transform.position = GetMouseWorldPosition() + dragOffset;
     }
 
-    private void OnMouseUp()
+    private void FinishDrag()
     {
-        if (isDragging)
+        bool droppedOnPizza = dropBox != null && dropBox.ContainsWorldPoint(transform.position);
+
+        if (droppedOnPizza && placedSlices < maxSlices)
         {
-            bool droppedOnPizza = dropBox != null && dropBox.ContainsWorldPoint(transform.position);
-
-            if (droppedOnPizza && placedSlices < maxSlices)
-            {
-                PlacePepperoniSlice();
-            }
-
-            transform.position = startPosition;
+            PlacePepperoniSlice();
         }
+
+        transform.position = startPosition;
+        isDragging = false;
     }
 
     private void PlacePepperoniSlice()
@@ -81,10 +99,12 @@ public class PizzaPepperoniSource : MonoBehaviour
 
     private void EnsureCollider()
     {
-        if (GetComponent<Collider2D>() != null)
+        if (sourceCollider != null)
             return;
 
         BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
+        sourceCollider = boxCollider;
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (spriteRenderer != null && spriteRenderer.sprite != null)
