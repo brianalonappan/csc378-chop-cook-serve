@@ -28,6 +28,8 @@ public class OrderManager : MonoBehaviour
     public bool resetOrderStateOnStart = true;
     public string kitchenSceneName = "UpDown";
     public string fridgeSceneName = "FridgeDetailed";
+    public string potatoCuttingSceneName = "CuttingBoardPotato";
+    public string potatoMixSceneName = "MixPotato";
 
     private List<ReceiptOrder> receiptQueue = new List<ReceiptOrder>();
     private ReceiptOrder activeReceipt;
@@ -76,9 +78,9 @@ public class OrderManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        bool isFridgeScene = scene.name == fridgeSceneName;
+        bool shouldHideReceipts = ShouldHideReceiptsInScene(scene.name);
 
-        if (isFridgeScene)
+        if (shouldHideReceipts)
         {
             receiptSpawnParent = persistentReceiptParent;
         }
@@ -91,7 +93,14 @@ public class OrderManager : MonoBehaviour
         ReparentPersistentReceipts();
 
         if (persistentReceiptCanvas != null)
-            persistentReceiptCanvas.SetActive(!isFridgeScene && receiptSpawnParent == persistentReceiptParent);
+            persistentReceiptCanvas.SetActive(!shouldHideReceipts && receiptSpawnParent == persistentReceiptParent);
+    }
+
+    private bool ShouldHideReceiptsInScene(string sceneName)
+    {
+        return sceneName == fridgeSceneName ||
+            sceneName == potatoCuttingSceneName ||
+            sceneName == potatoMixSceneName;
     }
 
     private void CreatePersistentReceiptCanvas()
@@ -196,7 +205,8 @@ public class OrderManager : MonoBehaviour
 
         if (persistentReceiptCanvas != null)
         {
-            persistentReceiptCanvas.SetActive(receiptSpawnParent == persistentReceiptParent);
+            persistentReceiptCanvas.SetActive(!ShouldHideReceiptsInScene(SceneManager.GetActiveScene().name) &&
+                receiptSpawnParent == persistentReceiptParent);
         }
 
         ReparentPersistentReceipts();
