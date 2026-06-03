@@ -12,8 +12,9 @@ public class InteractableScript : MonoBehaviour
     public string fridgeSceneName = "Fridge Detailed";
     public string potatoCuttingSceneName = "CuttingBoardPotato";
     public string potatoMixSceneName = "MixPotato";
+    public string fryingSceneName = "FryingScene";
 
-    public void Interact()
+    public void Interact(Vector3 playerPosition)
     {
         hasBeenInteractedWith = true;
 
@@ -22,7 +23,10 @@ public class InteractableScript : MonoBehaviour
         if (stationType == StationType.Fridge)
         {
             if (OrderManager.Instance != null)
+            {
+                OrderManager.Instance.SavePlayerReturnPosition(playerPosition);
                 OrderManager.Instance.PrepareForSceneLoad();
+            }
 
             SceneManager.LoadScene(fridgeSceneName);
             return;
@@ -32,6 +36,7 @@ public class InteractableScript : MonoBehaviour
             OrderManager.Instance != null &&
             OrderManager.Instance.ActiveReceiptNeedsPotatoChopping())
         {
+            OrderManager.Instance.SavePlayerReturnPosition(playerPosition);
             OrderManager.Instance.PrepareForSceneLoad();
             SceneManager.LoadScene(potatoCuttingSceneName);
             return;
@@ -41,8 +46,19 @@ public class InteractableScript : MonoBehaviour
             OrderManager.Instance != null &&
             OrderManager.Instance.ActiveReceiptNeedsPotatoMixing())
         {
+            OrderManager.Instance.SavePlayerReturnPosition(playerPosition);
             OrderManager.Instance.PrepareForSceneLoad();
             SceneManager.LoadScene(potatoMixSceneName);
+            return;
+        }
+
+        if (stationType == StationType.Stove &&
+            OrderManager.Instance != null &&
+            OrderManager.Instance.ActiveReceiptNeedsFriesFrying())
+        {
+            OrderManager.Instance.SavePlayerReturnPosition(playerPosition);
+            OrderManager.Instance.PrepareForSceneLoad();
+            SceneManager.LoadScene(fryingSceneName);
             return;
         }
 

@@ -10,6 +10,7 @@ public class StationAlertManager : MonoBehaviour
     public GameObject ovenAlert;
     public GameObject stoveAlert;
     public GameObject dropOffAlert;
+    public GameObject trashAlert;
 
     private ReceiptOrder activeOrder;
     private StationType? lastStation;
@@ -40,5 +41,6 @@ public class StationAlertManager : MonoBehaviour
         ovenAlert.SetActive(station == StationType.Oven);
         stoveAlert.SetActive(station == StationType.Stove);
         dropOffAlert.SetActive(station == StationType.DropOff);
+        trashAlert.SetActive(station == StationType.TrashCan);
     }
 }

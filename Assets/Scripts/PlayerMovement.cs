@@ -114,6 +114,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Hit object does not have StationInteractable attached.");
             return;
         }
-        station.Interact();
+        station.Interact(transform.position);
     }
 }

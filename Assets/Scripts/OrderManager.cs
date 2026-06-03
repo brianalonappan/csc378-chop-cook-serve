@@ -30,12 +30,15 @@ public class OrderManager : MonoBehaviour
     public string fridgeSceneName = "FridgeDetailed";
     public string potatoCuttingSceneName = "CuttingBoardPotato";
     public string potatoMixSceneName = "MixPotato";
+    public string fryingSceneName = "FryingScene";
 
     private List<ReceiptOrder> receiptQueue = new List<ReceiptOrder>();
     private ReceiptOrder activeReceipt;
 
     private GameObject persistentReceiptCanvas;
     private RectTransform persistentReceiptParent;
+    private bool hasPlayerReturnPosition;
+    private Vector3 playerReturnPosition;
 
     public ReceiptOrder ActiveReceipt => activeReceipt;
     public OrderState State => orderState;
@@ -94,13 +97,46 @@ public class OrderManager : MonoBehaviour
 
         if (persistentReceiptCanvas != null)
             persistentReceiptCanvas.SetActive(!shouldHideReceipts && receiptSpawnParent == persistentReceiptParent);
+
+        if (scene.name == kitchenSceneName)
+            StartCoroutine(RestorePlayerReturnPositionAfterSceneLoad());
+    }
+
+    public void SavePlayerReturnPosition(Vector3 position)
+    {
+        playerReturnPosition = position;
+        hasPlayerReturnPosition = true;
+    }
+
+    private IEnumerator RestorePlayerReturnPositionAfterSceneLoad()
+    {
+        if (!hasPlayerReturnPosition)
+            yield break;
+
+        yield return null;
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogWarning("Could not restore player position because no object is tagged Player.");
+            yield break;
+        }
+
+        player.transform.position = playerReturnPosition;
+
+        Rigidbody2D playerBody = player.GetComponent<Rigidbody2D>();
+        if (playerBody != null)
+            playerBody.position = playerReturnPosition;
+
+        hasPlayerReturnPosition = false;
     }
 
     private bool ShouldHideReceiptsInScene(string sceneName)
     {
         return sceneName == fridgeSceneName ||
             sceneName == potatoCuttingSceneName ||
-            sceneName == potatoMixSceneName;
+            sceneName == potatoMixSceneName ||
+            sceneName == fryingSceneName;
     }
 
     private void CreatePersistentReceiptCanvas()
@@ -354,6 +390,15 @@ public class OrderManager : MonoBehaviour
             !activeReceipt.finishedOrder;
     }
 
+    public bool ActiveReceiptNeedsFriesFrying()
+    {
+        return activeReceipt != null &&
+            activeReceipt.orderType == OrderType.FrenchFries &&
+            activeReceipt.addedToppings &&
+            !activeReceipt.cookedOrBaked &&
+            !activeReceipt.finishedOrder;
+    }
+
     public bool CompletePotatoChoppingForActiveReceipt()
     {
         if (activeReceipt == null)
@@ -384,6 +429,22 @@ public class OrderManager : MonoBehaviour
             PublishActiveOrderState();
 
         return completedPotatoMixing;
+    }
+
+    public bool CompleteFriesFryingForActiveReceipt(bool burned)
+    {
+        if (activeReceipt == null)
+        {
+            Debug.Log("No active receipt.");
+            return false;
+        }
+
+        bool completedFriesFrying = activeReceipt.CompleteFriesFrying(burned);
+
+        if (completedFriesFrying)
+            PublishActiveOrderState();
+
+        return completedFriesFrying;
     }
 
     public void CompleteReceipt(ReceiptOrder completedReceipt)

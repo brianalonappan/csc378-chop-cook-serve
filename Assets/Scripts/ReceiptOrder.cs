@@ -46,7 +46,16 @@ public class ReceiptOrder : MonoBehaviour
     {
         if (stationType == StationType.TrashCan && foodBurned)
         {
-            ResetOrderProgress();
+            // Ensure we have a reference to HeldFoodVisuals
+            if (heldFoodVisuals == null)
+                heldFoodVisuals = FindAnyObjectByType<HeldFoodVisuals>();
+            
+            if (heldFoodVisuals != null)
+                heldFoodVisuals.HideAllFood();
+            else
+                Debug.LogWarning("HeldFoodVisuals not found when trying to hide burnt fries!");
+            
+            RemoveReceipt();
             Debug.Log(orderType + " thrown away.");
             return true;
         }
@@ -125,13 +134,13 @@ public class ReceiptOrder : MonoBehaviour
             addedToppings &&
             !cookedOrBaked)
         {
-            cookedOrBaked = true;
-            CrossOff("Cook Fries");
+            Debug.Log("Entered fries frying minigame");
             return true;
         }
 
         if (stationType == StationType.DropOff &&
             cookedOrBaked &&
+            !foodBurned &&
             !served)
         {
             served = true;
@@ -363,6 +372,22 @@ public class ReceiptOrder : MonoBehaviour
         return true;
     }
 
+    public bool CompleteFriesFrying(bool burned)
+    {
+        if (orderType != OrderType.FrenchFries)
+            return false;
+
+        if (!addedToppings || cookedOrBaked)
+            return false;
+
+        cookedOrBaked = true;
+        foodBurned = burned;
+        CrossOff("Cook Fries");
+
+        Debug.Log(burned ? "Fries burned in frying minigame" : "Fries cooked in frying minigame");
+        return true;
+    }
+
     public StationType? GetNextStation()
     {
         if (finishedOrder)
@@ -397,6 +422,9 @@ public class ReceiptOrder : MonoBehaviour
         {
             return StationType.ChoppingBlock;
         }
+
+        if (foodBurned)
+            return StationType.TrashCan;
 
         if (!served)
             return StationType.DropOff;
