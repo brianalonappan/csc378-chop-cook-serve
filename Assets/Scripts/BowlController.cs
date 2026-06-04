@@ -89,7 +89,10 @@ public class BowlController : MonoBehaviour
         if (ingredientParticles != null)
         {
             ingredientParticles.transform.position = dropPosition;
+            ApplyParticleColor(ingredientParticles, ingredient);
+            ingredientParticles.Clear();
             ingredientParticles.Play();
+            ingredientParticles.Emit(24);
             return;
         }
 
@@ -105,13 +108,16 @@ public class BowlController : MonoBehaviour
 
         ParticleSystem particles = particleObject.AddComponent<ParticleSystem>();
         ParticleSystemRenderer particleRenderer = particleObject.GetComponent<ParticleSystemRenderer>();
-        Shader particleShader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
+        particleRenderer.renderMode = ParticleSystemRenderMode.Billboard;
 
-        if (particleShader == null)
-            particleShader = Shader.Find("Sprites/Default");
+        if (bowlRenderer != null)
+        {
+            particleRenderer.sortingLayerID = bowlRenderer.sortingLayerID;
+            particleRenderer.sortingOrder = bowlRenderer.sortingOrder + 10;
 
-        if (particleShader != null)
-            particleRenderer.material = new Material(particleShader);
+            if (bowlRenderer.sharedMaterial != null)
+                particleRenderer.sharedMaterial = bowlRenderer.sharedMaterial;
+        }
 
         ParticleSystem.MainModule main = particles.main;
         main.duration = 0.35f;
@@ -140,6 +146,12 @@ public class BowlController : MonoBehaviour
         velocity.y = new ParticleSystem.MinMaxCurve(-0.6f, -0.15f);
 
         return particles;
+    }
+
+    private void ApplyParticleColor(ParticleSystem particles, string ingredient)
+    {
+        ParticleSystem.MainModule main = particles.main;
+        main.startColor = ingredient == "pepper" ? pepperParticleColor : saltParticleColor;
     }
 
     private IEnumerator FinishMixing()
