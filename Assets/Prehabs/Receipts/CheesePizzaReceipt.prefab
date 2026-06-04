@@ -162,7 +162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14, y: 184.0999}
+  m_AnchoredPosition: {x: 11, y: 156}
   m_SizeDelta: {x: 248.4761, y: 56.1111}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1236147210063995723
@@ -193,9 +193,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Receipt: Grab at Cashier\n   1 Cheese Pizza\n- Wash Hands\n- Grab Dough
-    & Cheese\n- Stretch Dough (on chopping block)\n- Sauce Dough & Top with Cheese
-    \n- Place in Oven\n- Cut pizza into 8 \n- Serve Pizza"
+  m_text: "Receipt:\n   1 Cheese Pizza\n- Wash Hands\n- Grab Dough & Cheese\n- Stretch
+    Dough, Sauce Dough & Top with Cheese \n- Place in Oven\n- Cut pizza into 8 \n-
+    Serve Pizza"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
   m_sharedMaterial: {fileID: -2009315659621768855, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
@@ -222,8 +222,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

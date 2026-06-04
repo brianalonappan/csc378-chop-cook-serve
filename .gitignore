@@ -104,3 +104,21 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+WebGLBuild/Build/WebGLBuild.data.br
+WebGLBuild/Build/WebGLBuild.framework.js.br
+WebGLBuild/Build/WebGLBuild.loader.js
+WebGLBuild/Build/WebGLBuild.wasm.br
+WebGLBuild/index.html
+WebGLBuild/TemplateData/favicon.ico
+WebGLBuild/TemplateData/fullscreen-button.png
+WebGLBuild/TemplateData/MemoryProfiler.png
+WebGLBuild/TemplateData/progress-bar-empty-dark.png
+WebGLBuild/TemplateData/progress-bar-empty-light.png
+WebGLBuild/TemplateData/progress-bar-full-dark.png
+WebGLBuild/TemplateData/progress-bar-full-light.png
+WebGLBuild/TemplateData/style.css
+WebGLBuild/TemplateData/unity-logo-dark.png
+WebGLBuild/TemplateData/unity-logo-light.png
+WebGLBuild/TemplateData/unity-logo-title-footer.png
+WebGLBuild/TemplateData/webmemd-icon.png
+WebGLBuild/WebGLBuildZipped.zip

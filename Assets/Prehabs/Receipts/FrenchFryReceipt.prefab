@@ -162,7 +162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.1212, y: 176.4151}
+  m_AnchoredPosition: {x: 10.1212, y: 155}
   m_SizeDelta: {x: 238.7424, y: 44.9734}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4041038874041425931
@@ -193,8 +193,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Receipt: Grab at Cashier\n   1 French Fries\n- Wash Hands\n- Grab Potato\n-
-    Chop Potato\n- Oil & Salt Potato\n- Cook Fries\n- Serve Fries"
+  m_text: "Receipt:\n   1 French Fries\n- Wash Hands\n- Grab Potato\n- Chop Potato\n-
+    Oil & Salt Potato\n- Cook Fries\n- Serve Fries"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
   m_sharedMaterial: {fileID: -2009315659621768855, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}

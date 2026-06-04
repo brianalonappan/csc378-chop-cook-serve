@@ -12,7 +12,7 @@ public class ReceiptOrder : MonoBehaviour
 {
     public OrderType orderType;
     public TMP_Text receiptText;
-    public Color activeTextColor = new Color(0.5f, 0.5f, 0.5f, 1f); // gray highlight
+    public Color activeTextColor = new Color(0.5f, 0.5f, 0.5f, 1f);
 
     private HeldFoodVisuals heldFoodVisuals;
     private Color originalTextColor;
@@ -46,15 +46,12 @@ public class ReceiptOrder : MonoBehaviour
     {
         if (stationType == StationType.TrashCan && foodBurned)
         {
-            // Ensure we have a reference to HeldFoodVisuals
             if (heldFoodVisuals == null)
                 heldFoodVisuals = FindAnyObjectByType<HeldFoodVisuals>();
-            
+
             if (heldFoodVisuals != null)
                 heldFoodVisuals.HideAllFood();
-            else
-                Debug.LogWarning("HeldFoodVisuals not found when trying to hide burnt fries!");
-            
+
             RemoveReceipt();
             Debug.Log(orderType + " thrown away.");
             return true;
@@ -66,14 +63,11 @@ public class ReceiptOrder : MonoBehaviour
         if (stationType == StationType.Cashier && !orderReceived)
         {
             orderReceived = true;
-            CrossOff("Grab at Cashier");
             Debug.Log(orderType + " order received");
             return true;
         }
 
-        if (stationType == StationType.Sink &&
-            orderReceived &&
-            !washedHands)
+        if (stationType == StationType.Sink && orderReceived && !washedHands)
         {
             washedHands = true;
             CrossOff("Wash Hands");
@@ -96,8 +90,7 @@ public class ReceiptOrder : MonoBehaviour
         if (orderType == OrderType.FrenchFries)
             return HandleFrenchFries(stationType);
 
-        if (orderType == OrderType.CheesePizza ||
-            orderType == OrderType.PepperoniPizza)
+        if (orderType == OrderType.CheesePizza || orderType == OrderType.PepperoniPizza)
             return HandlePizza(stationType);
 
         return false;
@@ -105,43 +98,33 @@ public class ReceiptOrder : MonoBehaviour
 
     private bool HandleFrenchFries(StationType stationType)
     {
-        if (stationType == StationType.Fridge &&
-            !grabbedIngredients)
+        if (stationType == StationType.Fridge && !grabbedIngredients)
         {
             grabbedIngredients = true;
             CrossOff("Grab Potato");
             return true;
         }
 
-        if (stationType == StationType.ChoppingBlock &&
-            grabbedIngredients &&
-            !choppedOrStretched)
+        if (stationType == StationType.ChoppingBlock && grabbedIngredients && !choppedOrStretched)
         {
             Debug.Log("Entered potato chopping minigame");
             return true;
         }
 
-        if (stationType == StationType.ToppingsTable &&
-            choppedOrStretched &&
-            !addedToppings)
+        if (stationType == StationType.ToppingsTable && choppedOrStretched && !addedToppings)
         {
             addedToppings = true;
             CrossOff("Oil & Salt Potato");
             return true;
         }
 
-        if (stationType == StationType.Stove &&
-            addedToppings &&
-            !cookedOrBaked)
+        if (stationType == StationType.Stove && addedToppings && !cookedOrBaked)
         {
             Debug.Log("Entered fries frying minigame");
             return true;
         }
 
-        if (stationType == StationType.DropOff &&
-            cookedOrBaked &&
-            !foodBurned &&
-            !served)
+        if (stationType == StationType.DropOff && cookedOrBaked && !foodBurned && !served)
         {
             served = true;
             finishedOrder = true;
@@ -150,7 +133,7 @@ public class ReceiptOrder : MonoBehaviour
             if (heldFoodVisuals != null)
                 heldFoodVisuals.HideAllFood();
 
-            Invoke("RemoveReceipt", 1f);
+            Invoke(nameof(RemoveReceipt), 1f);
             Debug.Log("Fries complete");
             return true;
         }
@@ -160,11 +143,9 @@ public class ReceiptOrder : MonoBehaviour
 
     private bool HandlePizza(StationType stationType)
     {
-        bool isPepperoni =
-            orderType == OrderType.PepperoniPizza;
+        bool isPepperoni = orderType == OrderType.PepperoniPizza;
 
-        if (stationType == StationType.Fridge &&
-            !grabbedIngredients)
+        if (stationType == StationType.Fridge && !grabbedIngredients)
         {
             grabbedIngredients = true;
 
@@ -176,60 +157,53 @@ public class ReceiptOrder : MonoBehaviour
             return true;
         }
 
+        // Combined pizza prep step:
+        // Stretch Dough + Sauce Dough + Add Cheese/Pepperoni
         if (stationType == StationType.ChoppingBlock &&
             grabbedIngredients &&
-            !choppedOrStretched)
+            !choppedOrStretched &&
+            !addedToppings &&
+            !cookedOrBaked)
         {
             choppedOrStretched = true;
-            CrossOff("Stretch Dough (on chopping block)");
-            return true;
-        }
-
-        if (stationType == StationType.ToppingsTable &&
-            choppedOrStretched &&
-            !addedToppings)
-        {
             addedToppings = true;
 
             if (isPepperoni)
             {
-                CrossOff("Sauce Dough & Top with Cheese + Pepperoni");
+                CrossOff("Stretch Dough, Sauce Dough & Top with Cheese + Pepperoni");
 
                 if (heldFoodVisuals != null)
                     heldFoodVisuals.ShowPepperoniPizza();
             }
             else
             {
-                CrossOff("Sauce Dough & Top with Cheese");
+                CrossOff("Stretch Dough, Sauce Dough & Top with Cheese");
 
                 if (heldFoodVisuals != null)
                     heldFoodVisuals.ShowCheesePizza();
             }
 
+            Debug.Log(orderType + " prepped on chopping block");
             return true;
         }
 
-        if (stationType == StationType.Oven &&
-            addedToppings &&
-            !cookedOrBaked)
+        if (stationType == StationType.Oven && addedToppings && !cookedOrBaked)
         {
             cookedOrBaked = true;
             CrossOff("Place in Oven");
+            Debug.Log(orderType + " placed in oven");
             return true;
         }
 
-        if (stationType == StationType.ChoppingBlock &&
-            cookedOrBaked &&
-            !cutPizza)
+        if (stationType == StationType.ChoppingBlock && cookedOrBaked && !cutPizza)
         {
             cutPizza = true;
             CrossOff("Cut pizza into 8");
+            Debug.Log(orderType + " cut into 8");
             return true;
         }
 
-        if (stationType == StationType.DropOff &&
-            cutPizza &&
-            !served)
+        if (stationType == StationType.DropOff && cutPizza && !served)
         {
             served = true;
             finishedOrder = true;
@@ -238,7 +212,7 @@ public class ReceiptOrder : MonoBehaviour
             if (heldFoodVisuals != null)
                 heldFoodVisuals.HideAllFood();
 
-            Invoke("RemoveReceipt", 1f);
+            Invoke(nameof(RemoveReceipt), 1f);
             Debug.Log(orderType + " complete");
             return true;
         }
@@ -260,50 +234,39 @@ public class ReceiptOrder : MonoBehaviour
     }
 
     public bool TryPickIngredient(IngredientType ingredient)
-{
-    if (!NeedsIngredient(ingredient))
     {
-        return false;
-    }
+        if (!NeedsIngredient(ingredient))
+            return false;
 
-    // For now, picking any correct fridge ingredient completes the fridge step.
-    TryCompleteStationTask(StationType.Fridge);
-
-    return true;
+        TryCompleteStationTask(StationType.Fridge);
+        return true;
     }
 
     private void CrossOff(string taskName)
     {
-        string normalText = "- " + taskName;
-        string crossedText = "<color=red><s>- " + taskName + "</s></color>";
-        if (receiptText.text.Contains(normalText))
+        if (receiptText == null)
         {
-            receiptText.text =
-                receiptText.text.Replace(normalText, crossedText);
+            Debug.LogWarning("Receipt text is missing.");
+            return;
         }
-        else
-        {
-            string wrappedText = "-\n    " + taskName;
-            string crossedWrappedText = "<color=red><s>-\n    " + taskName + "</s></color>";
 
-            if (receiptText.text.Contains(wrappedText))
+        string[] lines = receiptText.text.Split('\n');
+
+        for (int i = 0; i < lines.Length; i++)
+        {
+            string trimmedLine = lines[i].Trim();
+
+            if (trimmedLine == "- " + taskName)
             {
-                receiptText.text =
-                    receiptText.text.Replace(wrappedText, crossedWrappedText);
-            }
-            else
-            {
-                if (receiptText.text.Contains(taskName))
-                {
-                    receiptText.text =
-                        receiptText.text.Replace(taskName, "<color=red><s>" + taskName + "</s></color>");
-                }
-                else
-                {
-                    Debug.LogWarning("Task not found: " + normalText);
-                }
+                lines[i] = "<color=red><s>" + trimmedLine + "</s></color>";
+                receiptText.text = string.Join("\n", lines);
+                Debug.Log("Crossed off: " + taskName);
+                return;
             }
         }
+
+        Debug.LogWarning("Task not found: - " + taskName);
+        Debug.LogWarning("Receipt text was:\n" + receiptText.text);
     }
 
     public void SetHighlighted(bool highlighted)
@@ -328,6 +291,8 @@ public class ReceiptOrder : MonoBehaviour
 
     public void ResetOrderProgress()
     {
+        orderReceived = false;
+        washedHands = false;
         grabbedIngredients = false;
         choppedOrStretched = false;
         addedToppings = false;
@@ -340,8 +305,13 @@ public class ReceiptOrder : MonoBehaviour
         if (heldFoodVisuals != null)
             heldFoodVisuals.HideAllFood();
 
-        receiptText.text = receiptText.text.Replace("<s>", "");
-        receiptText.text = receiptText.text.Replace("</s>", "");
+        if (receiptText != null)
+        {
+            receiptText.text = receiptText.text.Replace("<color=red><s>", "");
+            receiptText.text = receiptText.text.Replace("</s></color>", "");
+            receiptText.text = receiptText.text.Replace("<s>", "");
+            receiptText.text = receiptText.text.Replace("</s>", "");
+        }
     }
 
     public bool CompletePotatoChopping()
@@ -402,34 +372,39 @@ public class ReceiptOrder : MonoBehaviour
         if (!grabbedIngredients)
             return StationType.Fridge;
 
-        if (!choppedOrStretched)
-            return StationType.ChoppingBlock;
-
-        if (!addedToppings)
-            return StationType.ToppingsTable;
-
-        if (!cookedOrBaked)
+        if (orderType == OrderType.CheesePizza || orderType == OrderType.PepperoniPizza)
         {
-            if (orderType == OrderType.FrenchFries)
+            if (!addedToppings)
+                return StationType.ChoppingBlock;
+
+            if (!cookedOrBaked)
+                return StationType.Oven;
+
+            if (!cutPizza)
+                return StationType.ChoppingBlock;
+
+            if (!served)
+                return StationType.DropOff;
+        }
+
+        if (orderType == OrderType.FrenchFries)
+        {
+            if (!choppedOrStretched)
+                return StationType.ChoppingBlock;
+
+            if (!addedToppings)
+                return StationType.ToppingsTable;
+
+            if (!cookedOrBaked)
                 return StationType.Stove;
 
-            return StationType.Oven;
+            if (foodBurned)
+                return StationType.TrashCan;
+
+            if (!served)
+                return StationType.DropOff;
         }
-
-        if ((orderType == OrderType.CheesePizza ||
-             orderType == OrderType.PepperoniPizza)
-             && !cutPizza)
-        {
-            return StationType.ChoppingBlock;
-        }
-
-        if (foodBurned)
-            return StationType.TrashCan;
-
-        if (!served)
-            return StationType.DropOff;
 
         return null;
     }
-
 }

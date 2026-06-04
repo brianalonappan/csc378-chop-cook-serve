@@ -18,6 +18,15 @@ EditorBuildSettings:
     path: Assets/Scenes/CuttingBoardPotato.unity
     guid: 5ae0a7eda8b724146af50d879acabf6c
   - enabled: 1
+    path: Assets/Scenes/PizzaPrepScene.unity
+    guid: d24b2a1e1cefc924f94331e875d947cd
+  - enabled: 1
+    path: Assets/Scenes/PepperoniScene.unity
+    guid: df46c2194225449409af9f8783025602
+  - enabled: 1
+    path: Assets/Scenes/CheeseScene.unity
+    guid: f4d677f340abd4a969c1357178f72bd4
+  - enabled: 1
     path: Assets/Scenes/MixPotato.unity
     guid: 1d2f8893d70134687b82dcc2b252ea78
   - enabled: 1
