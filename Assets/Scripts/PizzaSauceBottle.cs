@@ -6,6 +6,7 @@ public class PizzaSauceBottle : MonoBehaviour
     public PizzaSauceDropBox dropBox;
     public Transform pourPoint;
     public GameObject saucePourStream;
+    public GameObject sauceBlob;
     public GameObject sauceOnDough;
 
     private Vector3 startPosition;
@@ -82,15 +83,21 @@ public class PizzaSauceBottle : MonoBehaviour
         if (saucePourStream != null)
             saucePourStream.SetActive(true);
 
-        yield return new WaitForSeconds(1.2f);
-
-        if (sauceOnDough != null)
-            sauceOnDough.SetActive(true);
-
         yield return new WaitForSeconds(0.5f);
+
+        if (sauceBlob != null)
+            sauceBlob.SetActive(true);
+
+        yield return new WaitForSeconds(0.7f);
 
         if (saucePourStream != null)
             saucePourStream.SetActive(false);
+
+        if (sauceBlob != null)
+            sauceBlob.SetActive(false);
+
+        if (sauceOnDough != null)
+            sauceOnDough.SetActive(true);
 
         transform.position = startPosition;
         transform.rotation = Quaternion.identity;
