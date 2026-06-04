@@ -13,6 +13,8 @@ public class InteractableScript : MonoBehaviour
     public string potatoCuttingSceneName = "CuttingBoardPotato";
     public string potatoMixSceneName = "MixPotato";
     public string fryingSceneName = "FryingScene";
+    public string cheesePizzaSceneName = "CheeseScene";
+    public string pepperoniPizzaSceneName = "PepperoniScene";
 
     public void Interact(Vector3 playerPosition)
     {
@@ -39,6 +41,22 @@ public class InteractableScript : MonoBehaviour
             OrderManager.Instance.SavePlayerReturnPosition(playerPosition);
             OrderManager.Instance.PrepareForSceneLoad();
             SceneManager.LoadScene(potatoCuttingSceneName);
+            return;
+        }
+
+        if (stationType == StationType.ChoppingBlock &&
+            OrderManager.Instance != null &&
+            OrderManager.Instance.ActiveReceiptNeedsPizzaPrep())
+        {
+            OrderManager.Instance.SavePlayerReturnPosition(playerPosition);
+            OrderManager.Instance.PrepareForSceneLoad();
+
+            string pizzaSceneName =
+                OrderManager.Instance.ActiveOrderType == OrderType.PepperoniPizza
+                    ? pepperoniPizzaSceneName
+                    : cheesePizzaSceneName;
+
+            SceneManager.LoadScene(pizzaSceneName);
             return;
         }
 

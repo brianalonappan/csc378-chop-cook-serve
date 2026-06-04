@@ -109,11 +109,20 @@ public class PlayerMovement : MonoBehaviour
 
         InteractableScript station = hit.collider.GetComponent<InteractableScript>();
 
-        if (station == null)
+        if (station != null)
         {
-            Debug.Log("Hit object does not have StationInteractable attached.");
+            station.Interact(transform.position);
             return;
         }
-        station.Interact(transform.position);
+
+        CustomerInteractable customer = hit.collider.GetComponent<CustomerInteractable>();
+
+        if (customer != null)
+        {
+            customer.Interact();
+            return;
+        }
+
+        Debug.Log("Hit object does not have an interactable component.");
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PizzaPepperoniSource : MonoBehaviour
 {
@@ -6,7 +7,9 @@ public class PizzaPepperoniSource : MonoBehaviour
     public GameObject pepperoniSlicePrefab;
 
     public int maxSlices = 5;
+    public int slicesNeededToFinish = 5;
     public Vector2 placementAreaSize = new Vector2(1.8f, 1.0f);
+    public string sceneToLoad = "UpDown";
 
     private Vector3 startPosition;
     private Vector3 dragOffset;
@@ -84,6 +87,14 @@ public class PizzaPepperoniSource : MonoBehaviour
 
         placedSlices++;
         Debug.Log("Placed pepperoni slice: " + placedSlices);
+
+        if (placedSlices >= Mathf.Min(slicesNeededToFinish, maxSlices) &&
+            OrderManager.Instance != null &&
+            OrderManager.Instance.ActiveOrderType == OrderType.PepperoniPizza &&
+            OrderManager.Instance.CompletePizzaPrepForActiveReceipt())
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 
     private Vector3 GetMouseWorldPosition()

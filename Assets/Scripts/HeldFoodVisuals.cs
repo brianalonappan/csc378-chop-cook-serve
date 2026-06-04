@@ -2,6 +2,14 @@ using UnityEngine;
 
 public class HeldFoodVisuals : MonoBehaviour
 {
+    public enum HeldFoodType
+    {
+        None,
+        PepperoniPizza,
+        CheesePizza,
+        Fries
+    }
+
     public GameObject heldPepperoniPizza;
     public GameObject heldCheesePizza;
     public GameObject heldFries;
@@ -9,6 +17,10 @@ public class HeldFoodVisuals : MonoBehaviour
     public Color burnedFriesColor = new Color(0.18f, 0.12f, 0.07f, 1f);
 
     private SpriteRenderer[] heldFriesRenderers;
+
+    public HeldFoodType CurrentFood { get; private set; }
+    public bool HoldingBurnedFood { get; private set; }
+    public bool IsHoldingFood => CurrentFood != HeldFoodType.None;
 
     private void Start()
     {
@@ -18,6 +30,9 @@ public class HeldFoodVisuals : MonoBehaviour
 
     public void HideAllFood()
     {
+        CurrentFood = HeldFoodType.None;
+        HoldingBurnedFood = false;
+
         if (heldPepperoniPizza != null)
             heldPepperoniPizza.SetActive(false);
 
@@ -34,6 +49,9 @@ public class HeldFoodVisuals : MonoBehaviour
 
         if (heldPepperoniPizza != null)
             heldPepperoniPizza.SetActive(true);
+
+        CurrentFood = HeldFoodType.PepperoniPizza;
+        HoldingBurnedFood = false;
     }
 
     public void ShowCheesePizza()
@@ -42,6 +60,9 @@ public class HeldFoodVisuals : MonoBehaviour
 
         if (heldCheesePizza != null)
             heldCheesePizza.SetActive(true);
+
+        CurrentFood = HeldFoodType.CheesePizza;
+        HoldingBurnedFood = false;
     }
 
     public void ShowFries(bool burned = false)
@@ -53,6 +74,26 @@ public class HeldFoodVisuals : MonoBehaviour
             ApplyFriesColor(burned);
             heldFries.SetActive(true);
         }
+
+        CurrentFood = HeldFoodType.Fries;
+        HoldingBurnedFood = burned;
+    }
+
+    public bool CanServeOrder(OrderType orderType)
+    {
+        switch (orderType)
+        {
+            case OrderType.FrenchFries:
+                return CurrentFood == HeldFoodType.Fries && !HoldingBurnedFood;
+
+            case OrderType.CheesePizza:
+                return CurrentFood == HeldFoodType.CheesePizza;
+
+            case OrderType.PepperoniPizza:
+                return CurrentFood == HeldFoodType.PepperoniPizza;
+        }
+
+        return false;
     }
 
     private void ApplyFriesColor(bool burned)

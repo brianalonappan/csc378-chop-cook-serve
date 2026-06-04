@@ -14,9 +14,12 @@ public class PizzaSauceBottle : MonoBehaviour
     private bool isDragging;
     private bool isPouring;
 
+    public bool SauceAdded { get; private set; }
+
     private void Start()
     {
         startPosition = transform.position;
+        SauceAdded = false;
 
         if (dropBox == null)
             dropBox = FindAnyObjectByType<PizzaSauceDropBox>();
@@ -98,6 +101,8 @@ public class PizzaSauceBottle : MonoBehaviour
 
         if (sauceOnDough != null)
             sauceOnDough.SetActive(true);
+
+        SauceAdded = true;
 
         transform.position = startPosition;
         transform.rotation = Quaternion.identity;

@@ -50,14 +50,20 @@ public class StationAlertManager : MonoBehaviour
 
     private void ShowOnlyAlert(StationType? station)
     {
-        cashierAlert.SetActive(station == StationType.Cashier);
-        sinkAlert.SetActive(station == StationType.Sink);
-        fridgeAlert.SetActive(station == StationType.Fridge);
-        choppingAlert.SetActive(station == StationType.ChoppingBlock);
-        toppingAlert.SetActive(station == StationType.ToppingsTable);
-        ovenAlert.SetActive(station == StationType.Oven);
-        stoveAlert.SetActive(station == StationType.Stove);
-        dropOffAlert.SetActive(station == StationType.DropOff);
-        trashAlert.SetActive(station == StationType.TrashCan);
+        SetAlert(cashierAlert, station == StationType.Cashier);
+        SetAlert(sinkAlert, station == StationType.Sink);
+        SetAlert(fridgeAlert, station == StationType.Fridge);
+        SetAlert(choppingAlert, station == StationType.ChoppingBlock);
+        SetAlert(toppingAlert, station == StationType.ToppingsTable);
+        SetAlert(ovenAlert, station == StationType.Oven);
+        SetAlert(stoveAlert, station == StationType.Stove);
+        SetAlert(dropOffAlert, station == StationType.DropOff);
+        SetAlert(trashAlert, station == StationType.TrashCan);
+    }
+
+    private void SetAlert(GameObject alert, bool active)
+    {
+        if (alert != null)
+            alert.SetActive(active);
     }
 }

@@ -49,6 +49,14 @@ public class ReceiptOrder : MonoBehaviour
             if (heldFoodVisuals == null)
                 heldFoodVisuals = FindAnyObjectByType<HeldFoodVisuals>();
 
+            if (heldFoodVisuals == null ||
+                heldFoodVisuals.CurrentFood != HeldFoodVisuals.HeldFoodType.Fries ||
+                !heldFoodVisuals.HoldingBurnedFood)
+            {
+                Debug.Log("Need to hold the burned fries to throw them away.");
+                return false;
+            }
+
             if (heldFoodVisuals != null)
                 heldFoodVisuals.HideAllFood();
 
@@ -126,6 +134,12 @@ public class ReceiptOrder : MonoBehaviour
 
         if (stationType == StationType.DropOff && cookedOrBaked && !foodBurned && !served)
         {
+            if (!IsHoldingCorrectFood())
+            {
+                Debug.Log("Need to bring the fries to the customer.");
+                return false;
+            }
+
             served = true;
             finishedOrder = true;
             CrossOff("Serve Fries");
@@ -157,33 +171,13 @@ public class ReceiptOrder : MonoBehaviour
             return true;
         }
 
-        // Combined pizza prep step:
-        // Stretch Dough + Sauce Dough + Add Cheese/Pepperoni
         if (stationType == StationType.ChoppingBlock &&
             grabbedIngredients &&
             !choppedOrStretched &&
             !addedToppings &&
             !cookedOrBaked)
         {
-            choppedOrStretched = true;
-            addedToppings = true;
-
-            if (isPepperoni)
-            {
-                CrossOff("Stretch Dough, Sauce Dough & Top with Cheese + Pepperoni");
-
-                if (heldFoodVisuals != null)
-                    heldFoodVisuals.ShowPepperoniPizza();
-            }
-            else
-            {
-                CrossOff("Stretch Dough, Sauce Dough & Top with Cheese");
-
-                if (heldFoodVisuals != null)
-                    heldFoodVisuals.ShowCheesePizza();
-            }
-
-            Debug.Log(orderType + " prepped on chopping block");
+            Debug.Log("Entered pizza prep scene");
             return true;
         }
 
@@ -205,6 +199,12 @@ public class ReceiptOrder : MonoBehaviour
 
         if (stationType == StationType.DropOff && cutPizza && !served)
         {
+            if (!IsHoldingCorrectFood())
+            {
+                Debug.Log("Need to bring the correct pizza to the customer.");
+                return false;
+            }
+
             served = true;
             finishedOrder = true;
             CrossOff("Serve Pizza");
@@ -218,6 +218,14 @@ public class ReceiptOrder : MonoBehaviour
         }
 
         return false;
+    }
+
+    private bool IsHoldingCorrectFood()
+    {
+        if (heldFoodVisuals == null)
+            heldFoodVisuals = FindAnyObjectByType<HeldFoodVisuals>();
+
+        return heldFoodVisuals != null && heldFoodVisuals.CanServeOrder(orderType);
     }
 
     public bool NeedsIngredient(IngredientType ingredient)
@@ -355,6 +363,33 @@ public class ReceiptOrder : MonoBehaviour
         CrossOff("Cook Fries");
 
         Debug.Log(burned ? "Fries burned in frying minigame" : "Fries cooked in frying minigame");
+        return true;
+    }
+
+    public bool CompletePizzaPrep()
+    {
+        bool isPepperoni = orderType == OrderType.PepperoniPizza;
+        bool isPizza = orderType == OrderType.CheesePizza || isPepperoni;
+
+        if (!isPizza)
+            return false;
+
+        if (!grabbedIngredients || addedToppings)
+            return false;
+
+        choppedOrStretched = true;
+        addedToppings = true;
+
+        if (isPepperoni)
+        {
+            CrossOff("Stretch Dough, Sauce Dough & Top with Cheese + Pepperoni");
+        }
+        else
+        {
+            CrossOff("Stretch Dough, Sauce Dough & Top with Cheese");
+        }
+
+        Debug.Log(orderType + " prep complete from pizza scene");
         return true;
     }
 

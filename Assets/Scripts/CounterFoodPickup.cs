@@ -41,6 +41,12 @@ public class CounterFoodPickup : MonoBehaviour
             if (heldFoodVisuals == null)
                 return;
 
+            if (heldFoodVisuals.IsHoldingFood)
+            {
+                Debug.Log("Already holding food.");
+                return;
+            }
+
             if (foodType == FoodType.PepperoniPizza)
             {
                 heldFoodVisuals.ShowPepperoniPizza();
@@ -53,9 +59,6 @@ public class CounterFoodPickup : MonoBehaviour
             {
                 bool burned = IsFoodBurned();
                 heldFoodVisuals.ShowFries(burned);
-
-                if (!burned && OrderManager.Instance != null)
-                    OrderManager.Instance.TryUseStation(StationType.DropOff);
             }
 
             if (audioSource != null && pickupSound != null)

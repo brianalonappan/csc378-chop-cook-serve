@@ -33,6 +33,9 @@ public class OrderManager : MonoBehaviour
     public string potatoCuttingSceneName = "CuttingBoardPotato";
     public string potatoMixSceneName = "MixPotato";
     public string fryingSceneName = "FryingScene";
+    public string cheesePizzaSceneName = "CheeseScene";
+    public string pepperoniPizzaSceneName = "PepperoniScene";
+    public string pizzaPrepSceneName = "PizzaPrepScene";
 
     public bool showReceiptOnlyAfterCashier = true;
     public GameObject customerObject;
@@ -220,7 +223,10 @@ public class OrderManager : MonoBehaviour
         return sceneName == fridgeSceneName ||
                sceneName == potatoCuttingSceneName ||
                sceneName == potatoMixSceneName ||
-               sceneName == fryingSceneName;
+               sceneName == fryingSceneName ||
+               sceneName == cheesePizzaSceneName ||
+               sceneName == pepperoniPizzaSceneName ||
+               sceneName == pizzaPrepSceneName;
     }
 
     private void CreatePersistentReceiptCanvas()
@@ -417,6 +423,11 @@ public class OrderManager : MonoBehaviour
             SendCustomerOut();
         }
 
+        if (completedSomething && stationType == StationType.TrashCan)
+        {
+            SendCustomerOut();
+        }
+
         if (completedSomething)
         {
             PublishActiveOrderState();
@@ -487,6 +498,16 @@ public class OrderManager : MonoBehaviour
                !activeReceipt.finishedOrder;
     }
 
+    public bool ActiveReceiptNeedsPizzaPrep()
+    {
+        return activeReceipt != null &&
+               (activeReceipt.orderType == OrderType.CheesePizza ||
+                activeReceipt.orderType == OrderType.PepperoniPizza) &&
+               activeReceipt.grabbedIngredients &&
+               !activeReceipt.addedToppings &&
+               !activeReceipt.finishedOrder;
+    }
+
     public bool CompletePotatoChoppingForActiveReceipt()
     {
         if (activeReceipt == null)
@@ -533,6 +554,22 @@ public class OrderManager : MonoBehaviour
             PublishActiveOrderState();
 
         return completedFriesFrying;
+    }
+
+    public bool CompletePizzaPrepForActiveReceipt()
+    {
+        if (activeReceipt == null)
+        {
+            Debug.Log("No active receipt.");
+            return false;
+        }
+
+        bool completedPizzaPrep = activeReceipt.CompletePizzaPrep();
+
+        if (completedPizzaPrep)
+            PublishActiveOrderState();
+
+        return completedPizzaPrep;
     }
 
     public void CompleteReceipt(ReceiptOrder completedReceipt)

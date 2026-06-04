@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PizzaCheeseBlock : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PizzaCheeseBlock : MonoBehaviour
     public GameObject cheeseOnDough;
 
     public float sprinkleNeeded = 4f;
+    public string sceneToLoad = "UpDown";
 
     private Vector3 startPosition;
     private Vector3 dragOffset;
@@ -14,6 +16,7 @@ public class PizzaCheeseBlock : MonoBehaviour
     private bool isSprinkling;
     private float sprinkleProgress;
     private Vector3 lastMouseWorldPosition;
+    private PizzaSauceBottle sauceBottle;
 
     private void Start()
     {
@@ -21,6 +24,8 @@ public class PizzaCheeseBlock : MonoBehaviour
 
         if (dropBox == null)
             dropBox = FindAnyObjectByType<PizzaCheeseDropBox>();
+
+        sauceBottle = FindAnyObjectByType<PizzaSauceBottle>();
 
         if (cheeseOnDough != null)
             cheeseOnDough.SetActive(false);
@@ -30,7 +35,7 @@ public class PizzaCheeseBlock : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (isSprinkling)
+        if (isSprinkling || !CanPlaceCheese())
             return;
 
         startPosition = transform.position;
@@ -43,7 +48,7 @@ public class PizzaCheeseBlock : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (isSprinkling)
+        if (isSprinkling || !CanPlaceCheese())
             return;
 
         isDragging = true;
@@ -59,7 +64,7 @@ public class PizzaCheeseBlock : MonoBehaviour
         {
             bool droppedOnPizza = dropBox != null && dropBox.ContainsWorldPoint(transform.position);
 
-            if (droppedOnPizza)
+            if (droppedOnPizza && CanPlaceCheese())
             {
                 StartCoroutine(SprinkleSequence());
                 return;
@@ -67,6 +72,11 @@ public class PizzaCheeseBlock : MonoBehaviour
 
             transform.position = startPosition;
         }
+    }
+
+    private bool CanPlaceCheese()
+    {
+        return sauceBottle == null || sauceBottle.SauceAdded;
     }
 
     private IEnumerator SprinkleSequence()
@@ -90,6 +100,13 @@ public class PizzaCheeseBlock : MonoBehaviour
 
         transform.position = startPosition;
         isSprinkling = false;
+
+        if (OrderManager.Instance != null &&
+            OrderManager.Instance.ActiveOrderType == OrderType.CheesePizza &&
+            OrderManager.Instance.CompletePizzaPrepForActiveReceipt())
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 
     private Vector3 GetMouseWorldPosition()
