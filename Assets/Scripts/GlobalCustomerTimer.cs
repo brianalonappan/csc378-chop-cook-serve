@@ -7,7 +7,6 @@ public class GlobalCustomerTimer : MonoBehaviour
 
     public float minTime = 10f;
     public float maxTime = 15f;
-
     public string kitchenSceneName = "UpDown";
 
     private float timer;
@@ -23,9 +22,7 @@ public class GlobalCustomerTimer : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
         SceneManager.sceneLoaded += OnSceneLoaded;
-
         ResetTimer();
     }
 
@@ -37,6 +34,12 @@ public class GlobalCustomerTimer : MonoBehaviour
 
     private void Update()
     {
+        if (CustomerOrOrderIsActive())
+        {
+            ResetTimer();
+            return;
+        }
+
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
@@ -46,18 +49,30 @@ public class GlobalCustomerTimer : MonoBehaviour
         }
     }
 
+    private bool CustomerOrOrderIsActive()
+    {
+        OrderManager orderManager = OrderManager.Instance;
+
+        if (orderManager == null || orderManager.customerObject == null)
+            return false;
+
+        CustomerWalker walker = orderManager.customerObject.GetComponent<CustomerWalker>();
+
+        return walker != null && walker.IsBusyWithCustomer();
+    }
+
     private void ResetTimer()
     {
         timer = Random.Range(minTime, maxTime);
-        Debug.Log("Next customer in " + timer + " seconds.");
     }
 
     private void TrySpawnOrQueueOrder()
     {
         if (SceneManager.GetActiveScene().name != kitchenSceneName)
         {
-            pendingOrders++;
-            Debug.Log("Customer queued while away from kitchen.");
+            if (!CustomerOrOrderIsActive())
+                pendingOrders++;
+
             return;
         }
 
@@ -71,24 +86,24 @@ public class GlobalCustomerTimer : MonoBehaviour
 
         while (pendingOrders > 0)
         {
-            if (!TrySpawnNow())
+            if (CustomerOrOrderIsActive())
                 return;
 
+            TrySpawnNow();
             pendingOrders--;
         }
     }
 
-    private bool TrySpawnNow()
+    private void TrySpawnNow()
     {
         OrderManager orderManager = OrderManager.Instance;
 
         if (orderManager == null)
-            return false;
+            return;
 
-        if (!orderManager.CanSpawnNewReceipt())
-            return false;
+        if (CustomerOrOrderIsActive())
+            return;
 
         orderManager.SpawnRandomReceipt();
-        return true;
     }
 }
