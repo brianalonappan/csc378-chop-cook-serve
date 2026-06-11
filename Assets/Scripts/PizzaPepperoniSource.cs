@@ -9,7 +9,7 @@ public class PizzaPepperoniSource : MonoBehaviour
 
     public int maxSlices = 8;
     public int slicesNeededToFinish = 8;
-    public string sceneToLoad = "PepperoniOvenScene";
+    public string sceneToLoad = "UpDown";
 
     private Vector3 startPosition;
     private Vector3 dragOffset;
@@ -36,6 +36,7 @@ public class PizzaPepperoniSource : MonoBehaviour
         placedSlices = 0;
         PizzaState.pepperoniCount = 0;
         PizzaState.pepperoniLocalPositions.Clear();
+        PizzaState.pepperoniLocalRotations.Clear();
     }
 
     private void Update()
@@ -99,6 +100,7 @@ public class PizzaPepperoniSource : MonoBehaviour
         {
             Vector3 localPosition = pizzaReference.InverseTransformPoint(spawnPosition);
             PizzaState.pepperoniLocalPositions.Add(localPosition);
+            PizzaState.pepperoniLocalRotations.Add(Quaternion.Inverse(pizzaReference.rotation) * slice.transform.rotation);
             Debug.Log("Saved pepperoni local position: " + localPosition + " | count: " + PizzaState.pepperoniCount);
         }
         else
@@ -108,7 +110,14 @@ public class PizzaPepperoniSource : MonoBehaviour
 
         if (placedSlices >= Mathf.Min(slicesNeededToFinish, maxSlices))
         {
+            if (OrderManager.Instance != null)
+                OrderManager.Instance.CompletePizzaPrepForActiveReceipt();
+
             Debug.Log("Loading scene: " + sceneToLoad);
+
+            if (OrderManager.Instance != null)
+                OrderManager.Instance.PrepareForSceneLoad();
+
             SceneManager.LoadScene(sceneToLoad);
         }
     }

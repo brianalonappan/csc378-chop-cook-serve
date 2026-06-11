@@ -103,6 +103,7 @@ public class PizzaSauceBottle : MonoBehaviour
             sauceOnDough.SetActive(true);
 
         SauceAdded = true;
+        PizzaState.sauceAdded = true;
 
         transform.position = startPosition;
         transform.rotation = Quaternion.identity;

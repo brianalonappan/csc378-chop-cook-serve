@@ -8,6 +8,7 @@ public static class PizzaState
 
     public static int pepperoniCount = 0;
     public static List<Vector3> pepperoniLocalPositions = new List<Vector3>();
+    public static List<Quaternion> pepperoniLocalRotations = new List<Quaternion>();
 
     public static void ResetPizza()
     {
@@ -15,5 +16,6 @@ public static class PizzaState
         cheeseAdded = false;
         pepperoniCount = 0;
         pepperoniLocalPositions.Clear();
+        pepperoniLocalRotations.Clear();
     }
 }

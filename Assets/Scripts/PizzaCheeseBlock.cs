@@ -8,7 +8,7 @@ public class PizzaCheeseBlock : MonoBehaviour
     public GameObject cheeseOnDough;
 
     public float sprinkleNeeded = 4f;
-    public string sceneToLoad = "CheeseOvenScene";
+    public string sceneToLoad = "UpDown";
 
     private Vector3 startPosition;
     private Vector3 dragOffset;
@@ -100,12 +100,21 @@ public class PizzaCheeseBlock : MonoBehaviour
         if (cheeseOnDough != null)
             cheeseOnDough.SetActive(true);
 
+        PizzaState.cheeseAdded = true;
+
         transform.position = startPosition;
         isSprinkling = false;
 
         yield return new WaitForSeconds(2f);
 
+        if (OrderManager.Instance != null)
+            OrderManager.Instance.CompletePizzaPrepForActiveReceipt();
+
         Debug.Log("Loading scene: " + sceneToLoad);
+
+        if (OrderManager.Instance != null)
+            OrderManager.Instance.PrepareForSceneLoad();
+
         SceneManager.LoadScene(sceneToLoad);
     }
 

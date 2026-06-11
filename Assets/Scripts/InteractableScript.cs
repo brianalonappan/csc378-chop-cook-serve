@@ -15,6 +15,8 @@ public class InteractableScript : MonoBehaviour
     public string fryingSceneName = "FryingScene";
     public string cheesePizzaSceneName = "CheeseScene";
     public string pepperoniPizzaSceneName = "PepperoniScene";
+    public string cheeseOvenSceneName = "CheeseOvenScene";
+    public string pepperoniOvenSceneName = "PepperoniOvenScene";
 
     public void Interact(Vector3 playerPosition)
     {
@@ -77,6 +79,22 @@ public class InteractableScript : MonoBehaviour
             OrderManager.Instance.SavePlayerReturnPosition(playerPosition);
             OrderManager.Instance.PrepareForSceneLoad();
             SceneManager.LoadScene(fryingSceneName);
+            return;
+        }
+
+        if (stationType == StationType.Oven &&
+            OrderManager.Instance != null &&
+            OrderManager.Instance.ActiveReceiptNeedsPizzaBaking())
+        {
+            OrderManager.Instance.SavePlayerReturnPosition(playerPosition);
+            OrderManager.Instance.PrepareForSceneLoad();
+
+            string ovenSceneName =
+                OrderManager.Instance.ActiveOrderType == OrderType.PepperoniPizza
+                    ? pepperoniOvenSceneName
+                    : cheeseOvenSceneName;
+
+            SceneManager.LoadScene(ovenSceneName);
             return;
         }
 

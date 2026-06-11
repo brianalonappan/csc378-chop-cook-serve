@@ -4,6 +4,8 @@ public class PepperoniOvenSceneSetup : MonoBehaviour
 {
     public GameObject pepperoniSlicePrefab;
     public Transform wholePizza;
+    public GameObject sauceOnDough;
+    public GameObject cheeseOnDough;
 
     private void Start()
     {
@@ -13,13 +15,25 @@ public class PepperoniOvenSceneSetup : MonoBehaviour
             return;
         }
 
+        wholePizza.gameObject.SetActive(true);
+
         if (pepperoniSlicePrefab == null)
         {
             Debug.LogError("PepperoniOvenSceneSetup: PepperoniSlicePrefab is not assigned.");
             return;
         }
 
+        ApplySavedPizzaLayers();
         RebuildPepperoniFromState();
+    }
+
+    private void ApplySavedPizzaLayers()
+    {
+        if (sauceOnDough != null)
+            sauceOnDough.SetActive(PizzaState.sauceAdded);
+
+        if (cheeseOnDough != null)
+            cheeseOnDough.SetActive(PizzaState.cheeseAdded);
     }
 
     private void RebuildPepperoniFromState()
@@ -30,7 +44,11 @@ public class PepperoniOvenSceneSetup : MonoBehaviour
             Vector3 worldPos = wholePizza.TransformPoint(localPos);
             worldPos.z = 0f;
 
-            GameObject slice = Instantiate(pepperoniSlicePrefab, worldPos, Quaternion.identity);
+            Quaternion localRotation = i < PizzaState.pepperoniLocalRotations.Count
+                ? PizzaState.pepperoniLocalRotations[i]
+                : Quaternion.identity;
+
+            GameObject slice = Instantiate(pepperoniSlicePrefab, worldPos, wholePizza.rotation * localRotation);
             slice.transform.SetParent(wholePizza, true);
         }
 

@@ -1421,7 +1421,7 @@ MonoBehaviour:
   pizzaReference: {fileID: 336298607}
   maxSlices: 8
   slicesNeededToFinish: 5
-  sceneToLoad: PepperoniOvenScene
+  sceneToLoad: UpDown
 --- !u!61 &2076466720
 BoxCollider2D:
   m_ObjectHideFlags: 0

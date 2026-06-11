@@ -10,6 +10,8 @@ public class PizzaOvenDrag : MonoBehaviour
     public GameObject cookedPizza;
 
     public float bakeTime = 1.5f;
+    public string sceneToLoad = "UpDown";
+    public bool returnToSceneAfterBake = true;
 
     private Vector3 startPosition;
     private Vector3 dragOffset;
@@ -81,7 +83,18 @@ public class PizzaOvenDrag : MonoBehaviour
         if (cookedPizza != null)
             cookedPizza.SetActive(true);
 
+        if (OrderManager.Instance != null)
+            OrderManager.Instance.TryUseStation(StationType.Oven);
+
         isBaking = false;
+
+        if (returnToSceneAfterBake && !string.IsNullOrEmpty(sceneToLoad))
+        {
+            if (OrderManager.Instance != null)
+                OrderManager.Instance.PrepareForSceneLoad();
+
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
+        }
     }
 
     private Vector3 GetMouseWorldPosition()

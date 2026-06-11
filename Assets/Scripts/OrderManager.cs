@@ -36,6 +36,8 @@ public class OrderManager : MonoBehaviour
     public string cheesePizzaSceneName = "CheeseScene";
     public string pepperoniPizzaSceneName = "PepperoniScene";
     public string pizzaPrepSceneName = "PizzaPrepScene";
+    public string cheeseOvenSceneName = "CheeseOvenScene";
+    public string pepperoniOvenSceneName = "PepperoniOvenScene";
 
     public bool showReceiptOnlyAfterCashier = true;
     public GameObject customerObject;
@@ -226,7 +228,9 @@ public class OrderManager : MonoBehaviour
                sceneName == fryingSceneName ||
                sceneName == cheesePizzaSceneName ||
                sceneName == pepperoniPizzaSceneName ||
-               sceneName == pizzaPrepSceneName;
+               sceneName == pizzaPrepSceneName ||
+               sceneName == cheeseOvenSceneName ||
+               sceneName == pepperoniOvenSceneName;
     }
 
     private void CreatePersistentReceiptCanvas()
@@ -505,6 +509,16 @@ public class OrderManager : MonoBehaviour
                 activeReceipt.orderType == OrderType.PepperoniPizza) &&
                activeReceipt.grabbedIngredients &&
                !activeReceipt.addedToppings &&
+               !activeReceipt.finishedOrder;
+    }
+
+    public bool ActiveReceiptNeedsPizzaBaking()
+    {
+        return activeReceipt != null &&
+               (activeReceipt.orderType == OrderType.CheesePizza ||
+                activeReceipt.orderType == OrderType.PepperoniPizza) &&
+               activeReceipt.addedToppings &&
+               !activeReceipt.cookedOrBaked &&
                !activeReceipt.finishedOrder;
     }
 
