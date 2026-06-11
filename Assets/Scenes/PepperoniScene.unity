@@ -138,8 +138,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PizzaPepperoniSource
   dropBox: {fileID: 1586686683}
   pepperoniSlicePrefab: {fileID: 6713651715616050560, guid: 46f5e79e9c0cd413a954cba3b3453d2c, type: 3}
+  pizzaReference: {fileID: 0}
   maxSlices: 8
-  placementAreaSize: {x: 2.2, y: 1.4}
+  slicesNeededToFinish: 5
+  sceneToLoad: UpDown
 --- !u!61 &206320525
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -270,11 +272,45 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254901093}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4299362, y: -2.012376, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.1150763, y: -4.825446, z: 0}
   m_LocalScale: {x: 11.1826, y: 11.1826, z: 11.1826}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 336298607}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &336298606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336298607}
+  m_Layer: 0
+  m_Name: WholePizza
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &336298607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336298606}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.68514, y: 2.81307, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1586686680}
+  - {fileID: 254901095}
+  - {fileID: 724276957}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &610070503
@@ -517,12 +553,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724276955}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.78262496, y: -2.0879905, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.4677649, y: -4.9010606, z: 0}
   m_LocalScale: {x: 13.4416, y: 13.4416, z: 13.4416}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 336298607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1398689087
 GameObject:
@@ -937,12 +973,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586686676}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5612984, y: -2.0178316, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.2464385, y: -4.8309016, z: 0}
   m_LocalScale: {x: 0.98348826, y: 0.77120644, z: 1.0897105}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 336298607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1586686681
 MonoBehaviour:
@@ -1091,6 +1127,7 @@ MonoBehaviour:
   dropBox: {fileID: 1586686682}
   cheeseOnDough: {fileID: 724276955}
   sprinkleNeeded: 4
+  sceneToLoad: UpDown
 --- !u!61 &1638526245
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1381,8 +1418,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PizzaPepperoniSource
   dropBox: {fileID: 1586686683}
   pepperoniSlicePrefab: {fileID: 6713651715616050560, guid: 46f5e79e9c0cd413a954cba3b3453d2c, type: 3}
+  pizzaReference: {fileID: 336298607}
   maxSlices: 8
-  placementAreaSize: {x: 2.2, y: 1.4}
+  slicesNeededToFinish: 5
+  sceneToLoad: PepperoniOvenScene
 --- !u!61 &2076466720
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1609,13 +1648,11 @@ SceneRoots:
   m_Roots:
   - {fileID: 1781840853}
   - {fileID: 2089256468}
-  - {fileID: 1586686680}
   - {fileID: 610070506}
-  - {fileID: 254901095}
   - {fileID: 1398689090}
   - {fileID: 1498032884}
   - {fileID: 1638526243}
   - {fileID: 2076466718}
   - {fileID: 152990164198848248}
   - {fileID: 1419680931}
-  - {fileID: 724276957}
+  - {fileID: 336298607}

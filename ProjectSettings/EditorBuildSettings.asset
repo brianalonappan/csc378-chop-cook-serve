@@ -32,5 +32,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FryingScene.unity
     guid: bc4e3743bfef643aea679537f381393a
+  - enabled: 1
+    path: Assets/Scenes/PepperoniOvenScene.unity
+    guid: a846b6154fd544c87a029a9877b5c558
+  - enabled: 1
+    path: Assets/Scenes/CheeseOvenScene.unity
+    guid: 7fdba066e09844758bf761b84e14b027
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

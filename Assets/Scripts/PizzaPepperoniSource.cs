@@ -5,11 +5,11 @@ public class PizzaPepperoniSource : MonoBehaviour
 {
     public PizzaPepperoniDropBox dropBox;
     public GameObject pepperoniSlicePrefab;
+    public Transform pizzaReference;
 
-    public int maxSlices = 5;
-    public int slicesNeededToFinish = 5;
-    public Vector2 placementAreaSize = new Vector2(1.8f, 1.0f);
-    public string sceneToLoad = "UpDown";
+    public int maxSlices = 8;
+    public int slicesNeededToFinish = 8;
+    public string sceneToLoad = "PepperoniOvenScene";
 
     private Vector3 startPosition;
     private Vector3 dragOffset;
@@ -27,8 +27,15 @@ public class PizzaPepperoniSource : MonoBehaviour
         if (dropBox == null)
             dropBox = FindAnyObjectByType<PizzaPepperoniDropBox>();
 
+        if (pizzaReference == null)
+            pizzaReference = dropBox != null ? dropBox.transform : null;
+
         EnsureCollider();
         startPosition = transform.position;
+
+        placedSlices = 0;
+        PizzaState.pepperoniCount = 0;
+        PizzaState.pepperoniLocalPositions.Clear();
     }
 
     private void Update()
@@ -86,13 +93,22 @@ public class PizzaPepperoniSource : MonoBehaviour
         slice.transform.rotation = Quaternion.Euler(0f, 0f, randomRotation);
 
         placedSlices++;
-        Debug.Log("Placed pepperoni slice: " + placedSlices);
+        PizzaState.pepperoniCount = placedSlices;
 
-        if (placedSlices >= Mathf.Min(slicesNeededToFinish, maxSlices) &&
-            OrderManager.Instance != null &&
-            OrderManager.Instance.ActiveOrderType == OrderType.PepperoniPizza &&
-            OrderManager.Instance.CompletePizzaPrepForActiveReceipt())
+        if (pizzaReference != null)
         {
+            Vector3 localPosition = pizzaReference.InverseTransformPoint(spawnPosition);
+            PizzaState.pepperoniLocalPositions.Add(localPosition);
+            Debug.Log("Saved pepperoni local position: " + localPosition + " | count: " + PizzaState.pepperoniCount);
+        }
+        else
+        {
+            Debug.LogWarning("Pizza reference missing, could not save local pepperoni position.");
+        }
+
+        if (placedSlices >= Mathf.Min(slicesNeededToFinish, maxSlices))
+        {
+            Debug.Log("Loading scene: " + sceneToLoad);
             SceneManager.LoadScene(sceneToLoad);
         }
     }

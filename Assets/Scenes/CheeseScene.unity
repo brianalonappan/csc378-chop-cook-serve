@@ -1024,6 +1024,7 @@ MonoBehaviour:
   dropBox: {fileID: 1586686682}
   cheeseOnDough: {fileID: 724276955}
   sprinkleNeeded: 4
+  sceneToLoad: CheeseOvenScene
 --- !u!61 &1638526245
 BoxCollider2D:
   m_ObjectHideFlags: 0
