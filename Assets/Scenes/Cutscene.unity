@@ -2139,7 +2139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -340.2657}
+  m_AnchoredPosition: {x: 0, y: -265.0157}
   m_SizeDelta: {x: 1401.4932, y: 250.6809}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &484720967
@@ -2495,6 +2495,7 @@ MonoBehaviour:
   minTime: 10
   maxTime: 15
   kitchenSceneName: UpDown
+  requireActiveLeaderboardRound: 1
 --- !u!4 &671686487
 Transform:
   m_ObjectHideFlags: 0
@@ -2606,6 +2607,61 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 488.60785, y: 196.22478, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1097152821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1097152823}
+  - component: {fileID: 1097152822}
+  m_Layer: 0
+  m_Name: LeaderBoardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1097152822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097152821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f6403f5d314d9b810fbdca8f4b2808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeaderboardManager
+  roundDurationSeconds: 60
+  moneyGoal: 100
+  maxLeaderboardEntries: 10
+  startRoundOnAwake: 0
+  endRoundWhenMoneyGoalReached: 1
+  useUnityGamingServices: 1
+  unityLeaderboardId: ChopCookServe
+  unityEnvironmentName: production
+  frenchFriesValue: 10
+  cheesePizzaValue: 20
+  pepperoniPizzaValue: 25
+--- !u!4 &1097152823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097152821}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.39948, y: 21.087, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4872,7 +4928,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
   m_UseReflectionProbes: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -4911,3 +4967,4 @@ SceneRoots:
   - {fileID: 853289511}
   - {fileID: 1896277289}
   - {fileID: 671686487}
+  - {fileID: 1097152823}

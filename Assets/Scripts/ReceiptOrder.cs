@@ -143,6 +143,7 @@ public class ReceiptOrder : MonoBehaviour
             served = true;
             finishedOrder = true;
             CrossOff("Serve Fries");
+            LeaderboardManager.Instance?.RecordCompletedOrder(orderType);
 
             if (heldFoodVisuals != null)
                 heldFoodVisuals.HideAllFood();
@@ -208,6 +209,7 @@ public class ReceiptOrder : MonoBehaviour
             served = true;
             finishedOrder = true;
             CrossOff("Serve Pizza");
+            LeaderboardManager.Instance?.RecordCompletedOrder(orderType);
 
             if (heldFoodVisuals != null)
                 heldFoodVisuals.HideAllFood();

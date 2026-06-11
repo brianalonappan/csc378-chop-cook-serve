@@ -777,11 +777,11 @@ PlayerSettings:
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
   enableDirectStorage: 0
-  cloudProjectId: 92818df3-cba6-48fd-8425-5bd6969a9623
+  cloudProjectId: e43932d2-d27c-41cd-9f30-b6c3e7921ef7
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: csc378-chop-cook-serve
-  organizationId: brianalonappan
+  projectName: chopcookserve
+  organizationId: abeyahc
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

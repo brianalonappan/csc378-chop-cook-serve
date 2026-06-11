@@ -8,6 +8,7 @@ public class GlobalCustomerTimer : MonoBehaviour
     public float minTime = 10f;
     public float maxTime = 15f;
     public string kitchenSceneName = "UpDown";
+    public bool requireActiveLeaderboardRound;
 
     private float timer;
     private int pendingOrders;
@@ -34,6 +35,14 @@ public class GlobalCustomerTimer : MonoBehaviour
 
     private void Update()
     {
+        if (requireActiveLeaderboardRound &&
+            LeaderboardManager.Instance != null &&
+            !LeaderboardManager.Instance.RoundActive)
+        {
+            ResetTimer();
+            return;
+        }
+
         if (CustomerOrOrderIsActive())
         {
             ResetTimer();
