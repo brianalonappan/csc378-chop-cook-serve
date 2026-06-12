@@ -109,6 +109,7 @@ public class LeaderboardUI : MonoBehaviour
         if (leaderboardText != null)
         {
             leaderboardText.text = BuildLeaderboardText();
+            ResizeLeaderboardScrollContent();
             leaderboardText.gameObject.SetActive(!showLeaderboardOnlyAfterRound || manager.HasRoundEnded);
         }
 
@@ -126,6 +127,43 @@ public class LeaderboardUI : MonoBehaviour
     {
         if (refreshUnityLeaderboardOnStart && manager != null)
             manager.RefreshUnityLeaderboard();
+    }
+
+    private void ResizeLeaderboardScrollContent()
+    {
+        RectTransform textRect = leaderboardText.rectTransform;
+        RectTransform contentRect = textRect.parent as RectTransform;
+        if (contentRect == null)
+            return;
+
+        leaderboardText.enableWordWrapping = false;
+        leaderboardText.ForceMeshUpdate();
+
+        float preferredWidth = Mathf.Ceil(leaderboardText.preferredWidth);
+        float preferredHeight = Mathf.Ceil(leaderboardText.preferredHeight);
+        float viewportWidth = contentRect.parent is RectTransform viewportRectForWidth
+            ? viewportRectForWidth.rect.width
+            : 0f;
+        float viewportHeight = contentRect.parent is RectTransform viewportRect
+            ? viewportRect.rect.height
+            : 0f;
+        float contentWidth = Mathf.Max(preferredWidth, viewportWidth);
+        float contentHeight = Mathf.Max(preferredHeight, viewportHeight);
+
+        textRect.anchorMin = new Vector2(0f, 1f);
+        textRect.anchorMax = new Vector2(0f, 1f);
+        textRect.pivot = new Vector2(0f, 1f);
+        textRect.anchoredPosition = Vector2.zero;
+        textRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, contentWidth);
+        textRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, preferredHeight);
+
+        contentRect.anchoredPosition = new Vector2(0f, contentRect.anchoredPosition.y);
+        contentRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, contentWidth);
+        contentRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, contentHeight);
+
+        ScrollRect scrollRect = contentRect.GetComponentInParent<ScrollRect>();
+        if (scrollRect != null)
+            scrollRect.horizontalNormalizedPosition = 0f;
     }
 
     private void ShowRoundEndedMessage()
@@ -159,8 +197,6 @@ public class LeaderboardUI : MonoBehaviour
             builder.Append(entry.playerName);
             builder.Append("  $");
             builder.Append(entry.money);
-            builder.Append("  ");
-            builder.Append(FormatTime(entry.secondsRemaining));
             builder.AppendLine();
         }
 

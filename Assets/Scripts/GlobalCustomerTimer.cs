@@ -62,7 +62,13 @@ public class GlobalCustomerTimer : MonoBehaviour
     {
         OrderManager orderManager = OrderManager.Instance;
 
-        if (orderManager == null || orderManager.customerObject == null)
+        if (orderManager == null)
+            return false;
+
+        if (orderManager.ActiveReceipt != null)
+            return true;
+
+        if (orderManager.customerObject == null)
             return false;
 
         CustomerWalker walker = orderManager.customerObject.GetComponent<CustomerWalker>();

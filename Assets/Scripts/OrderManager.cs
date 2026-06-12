@@ -25,6 +25,7 @@ public class OrderManager : MonoBehaviour
 
     public float spawnInterval = 20f;
     public int maxReceiptsOnScreen = 3;
+    public bool allowMultipleReceiptsOnScreen;
     public bool spawnReceiptsInThisScene = true;
     public bool resetOrderStateOnStart = true;
 
@@ -670,6 +671,9 @@ public class OrderManager : MonoBehaviour
 
     public bool CanSpawnNewReceipt()
     {
+        if (!allowMultipleReceiptsOnScreen && receiptQueue.Count > 0)
+            return false;
+
         return receiptQueue.Count < maxReceiptsOnScreen;
     }
 }
