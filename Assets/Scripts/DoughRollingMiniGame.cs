@@ -14,6 +14,7 @@ public class DoughRollingMiniGame : MonoBehaviour
     private bool finishedStretching = false;
     private Vector3 lastMouseWorldPos;
     private float stretchProgress = 0f;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class DoughRollingMiniGame : MonoBehaviour
         }
 
         doughTransform.localScale = startScale;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnMouseDown()
@@ -32,11 +34,21 @@ public class DoughRollingMiniGame : MonoBehaviour
 
         isDragging = true;
         lastMouseWorldPos = GetMouseWorldPosition();
+
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+            audioSource.Play();
+        }
     }
 
     private void OnMouseUp()
     {
         isDragging = false;
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+        }
     }
 
     private void Update()

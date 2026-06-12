@@ -12,6 +12,7 @@ public class PotatoSliceMinigame : MonoBehaviour
 
     private int sliceCount = 0;
     private bool finished = false;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -32,6 +33,8 @@ public class PotatoSliceMinigame : MonoBehaviour
         {
             potatoRenderer = GetComponent<SpriteRenderer>();
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnMouseDown()
@@ -49,6 +52,13 @@ public class PotatoSliceMinigame : MonoBehaviour
             if (cutMarks[sliceCount] != null)
             {
                 cutMarks[sliceCount].SetActive(true);
+            }
+
+            if (audioSource != null)
+            {
+                audioSource.Stop();
+                audioSource.Play();
+                Debug.Log("Played potato chop sound");
             }
 
             sliceCount++;

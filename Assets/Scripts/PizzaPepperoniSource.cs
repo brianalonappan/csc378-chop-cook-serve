@@ -16,10 +16,12 @@ public class PizzaPepperoniSource : MonoBehaviour
     private bool isDragging;
     private int placedSlices = 0;
     private Collider2D sourceCollider;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         sourceCollider = GetComponent<Collider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -92,6 +94,12 @@ public class PizzaPepperoniSource : MonoBehaviour
 
         float randomRotation = Random.Range(-25f, 25f);
         slice.transform.rotation = Quaternion.Euler(0f, 0f, randomRotation);
+
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.PlayOneShot(audioSource.clip);
+            Debug.Log("Played pepperoni sound");
+        }
 
         placedSlices++;
         PizzaState.pepperoniCount = placedSlices;
