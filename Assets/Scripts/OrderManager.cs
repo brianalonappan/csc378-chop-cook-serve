@@ -134,10 +134,6 @@ public class OrderManager : MonoBehaviour
             yield break;
         }
 
-        // GlobalCustomerTimer handles spawning now.
-        // SpawnRandomReceipt();
-        // StartCoroutine(SpawnReceiptRoutine());
-
         Debug.Log("OrderManager finished delayed setup.");
     }
 
@@ -488,7 +484,7 @@ public class OrderManager : MonoBehaviour
     {
         return activeReceipt != null &&
                activeReceipt.orderType == OrderType.FrenchFries &&
-               activeReceipt.choppedOrStretched &&
+               activeReceipt.cookedOrBaked &&
                !activeReceipt.addedToppings &&
                !activeReceipt.finishedOrder;
     }
@@ -497,7 +493,7 @@ public class OrderManager : MonoBehaviour
     {
         return activeReceipt != null &&
                activeReceipt.orderType == OrderType.FrenchFries &&
-               activeReceipt.addedToppings &&
+               activeReceipt.choppedOrStretched &&
                !activeReceipt.cookedOrBaked &&
                !activeReceipt.finishedOrder;
     }

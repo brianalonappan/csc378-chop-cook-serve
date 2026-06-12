@@ -119,20 +119,20 @@ public class ReceiptOrder : MonoBehaviour
             return true;
         }
 
-        if (stationType == StationType.ToppingsTable && choppedOrStretched && !addedToppings)
+        if (stationType == StationType.Stove && choppedOrStretched && !cookedOrBaked)
+        {
+            Debug.Log("Entered fries frying minigame");
+            return true;
+        }
+
+        if (stationType == StationType.ToppingsTable && cookedOrBaked && !addedToppings)
         {
             addedToppings = true;
             CrossOff("Oil & Salt Potato");
             return true;
         }
 
-        if (stationType == StationType.Stove && addedToppings && !cookedOrBaked)
-        {
-            Debug.Log("Entered fries frying minigame");
-            return true;
-        }
-
-        if (stationType == StationType.DropOff && cookedOrBaked && !foodBurned && !served)
+        if (stationType == StationType.DropOff && addedToppings && !foodBurned && !served)
         {
             if (!IsHoldingCorrectFood())
             {
@@ -343,7 +343,7 @@ public class ReceiptOrder : MonoBehaviour
         if (orderType != OrderType.FrenchFries)
             return false;
 
-        if (!choppedOrStretched || addedToppings)
+        if (!cookedOrBaked || addedToppings)
             return false;
 
         addedToppings = true;
@@ -357,7 +357,7 @@ public class ReceiptOrder : MonoBehaviour
         if (orderType != OrderType.FrenchFries)
             return false;
 
-        if (!addedToppings || cookedOrBaked)
+        if (!choppedOrStretched || cookedOrBaked)
             return false;
 
         cookedOrBaked = true;
@@ -429,14 +429,14 @@ public class ReceiptOrder : MonoBehaviour
             if (!choppedOrStretched)
                 return StationType.ChoppingBlock;
 
-            if (!addedToppings)
-                return StationType.ToppingsTable;
-
             if (!cookedOrBaked)
                 return StationType.Stove;
 
             if (foodBurned)
                 return StationType.TrashCan;
+
+            if (!addedToppings)
+                return StationType.ToppingsTable;
 
             if (!served)
                 return StationType.DropOff;

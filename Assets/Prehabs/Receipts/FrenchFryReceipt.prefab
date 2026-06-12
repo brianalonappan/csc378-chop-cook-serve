@@ -194,7 +194,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Receipt:\n   1 French Fries\n- Wash Hands\n- Grab Potato\n- Chop Potato\n-
-    Oil & Salt Potato\n- Cook Fries\n- Serve Fries"
+    Cook Fries\n- Oil & Salt Potato\n- Serve Fries"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
   m_sharedMaterial: {fileID: -2009315659621768855, guid: dd6b8e15eec9943e9a303e14b0487b35, type: 2}
