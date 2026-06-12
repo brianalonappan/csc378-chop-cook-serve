@@ -797,6 +797,8 @@ MonoBehaviour:
   fryingSceneName: FryingScene
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
 --- !u!1 &141565393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,8 +1160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -378.03024, y: 312.94647}
-  m_SizeDelta: {x: 756.0605, y: 214.7064}
+  m_AnchoredPosition: {x: -196.11874, y: 152.84113}
+  m_SizeDelta: {x: 350.23, y: 99.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &193539795
 MonoBehaviour:
@@ -1338,6 +1340,8 @@ MonoBehaviour:
   fryingSceneName: FryingScene
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
 --- !u!1 &216455807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2495,6 +2499,8 @@ MonoBehaviour:
   fryingSceneName: FryingScene
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
 --- !u!1 &467173399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3307,6 +3313,8 @@ MonoBehaviour:
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
   pizzaPrepSceneName: PizzaPrepScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
   showReceiptOnlyAfterCashier: 1
   customerObject: {fileID: 592642240}
 --- !u!4 &610524988
@@ -3538,6 +3546,8 @@ MonoBehaviour:
   fryingSceneName: FryingScene
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
 --- !u!1 &670447961
 GameObject:
   m_ObjectHideFlags: 0
@@ -4087,7 +4097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 543, y: 388}
+  m_AnchoredPosition: {x: 276.0064, y: 143.29999}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &789336484
@@ -4702,7 +4712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 61.94922, y: 87.59891}
+  m_AnchoredPosition: {x: 83.25353, y: 22.047157}
   m_SizeDelta: {x: 258.8857, y: 48.5411}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &873323276
@@ -5023,7 +5033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 338.75, y: 387.75}
+  m_AnchoredPosition: {x: 276.0064, y: 174.67177}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &947618288
@@ -5228,6 +5238,8 @@ MonoBehaviour:
   fryingSceneName: FryingScene
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
 --- !u!1 &986072731
 GameObject:
   m_ObjectHideFlags: 0
@@ -5494,6 +5506,8 @@ MonoBehaviour:
   fryingSceneName: FryingScene
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
 --- !u!1 &1100569489
 GameObject:
   m_ObjectHideFlags: 0
@@ -5793,6 +5807,8 @@ MonoBehaviour:
   fryingSceneName: FryingScene
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
 --- !u!1 &1160851368
 GameObject:
   m_ObjectHideFlags: 0
@@ -5918,7 +5934,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45.434296, y: 137.81903}
+  m_AnchoredPosition: {x: 66.73861, y: 72.26728}
   m_SizeDelta: {x: 283.75, y: 39.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1200444824
@@ -6468,7 +6484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -6488,8 +6504,8 @@ Canvas:
   m_GameObject: {fileID: 1552640013}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 2005882607}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6500,8 +6516,8 @@ Canvas:
   m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -504871067
+  m_SortingOrder: 2000
   m_TargetDisplay: 0
 --- !u!224 &1552640017
 RectTransform:
@@ -6661,7 +6677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 62.281494, y: 16.189148}
+  m_AnchoredPosition: {x: 83.58581, y: -49.362602}
   m_SizeDelta: {x: 258.2211, y: 48.4165}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1698524952
@@ -7511,6 +7527,8 @@ MonoBehaviour:
   fryingSceneName: FryingScene
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
 --- !u!1 &1849450626
 GameObject:
   m_ObjectHideFlags: 0
@@ -7611,6 +7629,8 @@ MonoBehaviour:
   fryingSceneName: FryingScene
   cheesePizzaSceneName: CheeseScene
   pepperoniPizzaSceneName: PepperoniScene
+  cheeseOvenSceneName: CheeseOvenScene
+  pepperoniOvenSceneName: PepperoniOvenScene
 --- !u!1 &1870734705
 GameObject:
   m_ObjectHideFlags: 0
@@ -11075,7 +11095,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 132.75, y: 386}
+  m_AnchoredPosition: {x: 105.56111, y: 172.67178}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1963133636
