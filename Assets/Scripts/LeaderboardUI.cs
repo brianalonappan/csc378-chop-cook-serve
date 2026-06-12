@@ -18,6 +18,7 @@ public class LeaderboardUI : MonoBehaviour
     public TMP_Text leaderboardText;
     public TMP_Text roundMessageText;
     public bool showLeaderboardOnlyAfterRound = true;
+    public bool refreshUnityLeaderboardOnStart = true;
     public string restartSceneName = "Cutscene";
 
     private LeaderboardManager manager;
@@ -52,6 +53,7 @@ public class LeaderboardUI : MonoBehaviour
             resultsPanel.SetActive(manager.HasRoundEnded);
 
         Refresh();
+        RefreshUnityLeaderboardOnStart();
     }
 
     private void OnDestroy()
@@ -118,6 +120,12 @@ public class LeaderboardUI : MonoBehaviour
 
         if (startPanel != null && manager.RoundStarted && startPanel.activeSelf)
             startPanel.SetActive(false);
+    }
+
+    private void RefreshUnityLeaderboardOnStart()
+    {
+        if (refreshUnityLeaderboardOnStart && manager != null)
+            manager.RefreshUnityLeaderboard();
     }
 
     private void ShowRoundEndedMessage()

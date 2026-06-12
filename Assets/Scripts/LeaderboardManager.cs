@@ -9,7 +9,7 @@ public class LeaderboardManager : MonoBehaviour
 
     public float roundDurationSeconds = 180f;
     public int moneyGoal = 100;
-    public int maxLeaderboardEntries = 10;
+    public int maxLeaderboardEntries = 3;
     public bool startRoundOnAwake;
     public bool endRoundWhenMoneyGoalReached = true;
     public bool useUnityGamingServices;
