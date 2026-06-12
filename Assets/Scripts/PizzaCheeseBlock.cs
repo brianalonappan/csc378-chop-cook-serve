@@ -17,10 +17,12 @@ public class PizzaCheeseBlock : MonoBehaviour
     private float sprinkleProgress;
     private Vector3 lastMouseWorldPosition;
     private PizzaSauceBottle sauceBottle;
+    private AudioSource audioSource;
 
     private void Start()
     {
         startPosition = transform.position;
+        audioSource = GetComponent<AudioSource>();
 
         if (dropBox == null)
             dropBox = FindAnyObjectByType<PizzaCheeseDropBox>();
@@ -85,6 +87,12 @@ public class PizzaCheeseBlock : MonoBehaviour
         sprinkleProgress = 0f;
         lastMouseWorldPosition = GetMouseWorldPosition();
 
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+            audioSource.Play();
+        }
+
         while (sprinkleProgress < sprinkleNeeded)
         {
             Vector3 currentMouseWorldPosition = GetMouseWorldPosition();
@@ -110,12 +118,15 @@ public class PizzaCheeseBlock : MonoBehaviour
         if (OrderManager.Instance != null)
             OrderManager.Instance.CompletePizzaPrepForActiveReceipt();
 
-        Debug.Log("Loading scene: " + sceneToLoad);
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            Debug.Log("Loading scene: " + sceneToLoad);
 
-        if (OrderManager.Instance != null)
-            OrderManager.Instance.PrepareForSceneLoad();
+            if (OrderManager.Instance != null)
+                OrderManager.Instance.PrepareForSceneLoad();
 
-        SceneManager.LoadScene(sceneToLoad);
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 
     private Vector3 GetMouseWorldPosition()

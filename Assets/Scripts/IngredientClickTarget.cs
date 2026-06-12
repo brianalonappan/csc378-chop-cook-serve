@@ -5,6 +5,7 @@ public class IngredientClickTarget : MonoBehaviour
     [SerializeField] private BowlController bowlController;
     [SerializeField] private string ingredientName = "salt";
     [SerializeField] private Camera inputCamera;
+    [SerializeField] private AudioSource bowlAudioSource;
 
     private Vector3 startPosition;
     private Vector3 dragOffset;
@@ -17,6 +18,9 @@ public class IngredientClickTarget : MonoBehaviour
 
         if (inputCamera == null)
             inputCamera = Camera.main;
+
+        if (bowlAudioSource == null && bowlController != null)
+            bowlAudioSource = bowlController.GetComponent<AudioSource>();
 
         startPosition = transform.position;
     }
@@ -46,6 +50,12 @@ public class IngredientClickTarget : MonoBehaviour
         if (bowlController != null &&
             bowlController.TryAddIngredient(ingredientName, transform.position))
         {
+            if (bowlAudioSource != null)
+            {
+                bowlAudioSource.Stop();
+                bowlAudioSource.Play();
+            }
+
             gameObject.SetActive(false);
             return;
         }

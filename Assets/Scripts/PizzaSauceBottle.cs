@@ -13,6 +13,7 @@ public class PizzaSauceBottle : MonoBehaviour
     private Vector3 dragOffset;
     private bool isDragging;
     private bool isPouring;
+    private AudioSource audioSource;
 
     public bool SauceAdded { get; private set; }
 
@@ -20,6 +21,7 @@ public class PizzaSauceBottle : MonoBehaviour
     {
         startPosition = transform.position;
         SauceAdded = false;
+        audioSource = GetComponent<AudioSource>();
 
         if (dropBox == null)
             dropBox = FindAnyObjectByType<PizzaSauceDropBox>();
@@ -85,6 +87,12 @@ public class PizzaSauceBottle : MonoBehaviour
 
         if (saucePourStream != null)
             saucePourStream.SetActive(true);
+
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+            audioSource.Play();
+        }
 
         yield return new WaitForSeconds(0.5f);
 

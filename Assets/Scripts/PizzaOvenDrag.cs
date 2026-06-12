@@ -17,17 +17,24 @@ public class PizzaOvenDrag : MonoBehaviour
     private Vector3 dragOffset;
     private bool isDragging;
     private bool isBaking;
+    private AudioSource audioSource;
 
     private void Start()
     {
         startPosition = transform.position;
         EnsureCollider();
+        audioSource = GetComponent<AudioSource>();
 
         if (uncookedPizza != null)
             uncookedPizza.SetActive(true);
 
         if (cookedPizza != null)
             cookedPizza.SetActive(false);
+
+        if (audioSource != null)
+            Debug.Log("Found oven audio source");
+        else
+            Debug.Log("No oven audio source found");
     }
 
     private void OnMouseDown()
@@ -75,7 +82,21 @@ public class PizzaOvenDrag : MonoBehaviour
         if (ovenDropPoint != null)
             transform.position = ovenDropPoint.position;
 
+        if (audioSource != null)
+        {
+            Debug.Log("Starting oven fire sound");
+            audioSource.Stop();
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+
         yield return new WaitForSeconds(bakeTime);
+
+        if (audioSource != null)
+        {
+            Debug.Log("Stopping oven fire sound");
+            audioSource.Stop();
+        }
 
         if (uncookedPizza != null)
             uncookedPizza.SetActive(false);
